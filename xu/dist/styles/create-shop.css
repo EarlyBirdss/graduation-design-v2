@@ -1,0 +1,50 @@
+.tt {
+  margin-bottom: 40px;
+  padding: 20px 0;
+  border-bottom: 1px solid #e1e1e1;
+  color: #ff99cc;
+}
+.row {
+  padding: 15px 0;
+}
+.row .label {
+  display: inline-block;
+  width: 120px;
+}
+.row .input {
+  width: 240px;
+  height: 35px;
+  border: 1px solid #e1e1e1;
+  border-radius: 5px;
+}
+.row .file-row {
+  position: relative;
+}
+.row .file-unload {
+  width: 60px;
+  height: 35px;
+  line-height: 35px;
+  border-radius: 5px;
+  background: #ff99cc;
+  color: #fff;
+  font-size: 16px;
+}
+.row .file {
+  position: absolute;
+  top: 15px;
+  left: 120px;
+  width: 260px;
+  height: 35px;
+  opacity: 0;
+}
+.row .btn_sub {
+  margin-top: 30px;
+  margin-left: 120px;
+  width: 120px;
+  height: 35px;
+  line-height: 35px;
+  border-radius: 5px;
+  background: #ff99cc;
+  color: #fff;
+  font-size: 16px;
+}

@@ -1,0 +1,6 @@
+/node-modules/*
+/xu/node-modules/*
+/mine/node-modules/*
+gulpfile.js
+.gitignore
+.jshintrc

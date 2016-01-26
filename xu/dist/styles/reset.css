@@ -1,0 +1,66 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+div,
+html,
+body,
+ol,
+li,
+ul,
+span,
+i,
+b,
+strong,
+input,
+select,
+textarea,
+p,
+dd,
+dt,
+button {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+i {
+  font-style: normal;
+}
+ul,
+ol,
+li {
+  list-style: none;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+}
+input,
+textarea,
+select,
+button {
+  background: none;
+  outline: none;
+  border: none;
+}
+body {
+  font-size: 14px;
+  color: #777;
+  font-family: "Microsoft Yahei", "微软雅黑";
+}
+a {
+  color: #777;
+  text-decoration: none;
+}
+a.hover,
+a.active,
+a.visited {
+  text-decoration: none;
+  color: #ff99cc;
+}

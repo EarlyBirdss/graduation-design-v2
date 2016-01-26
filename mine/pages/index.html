@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>团队协作任务管理器</title>
+	<link href="plugin/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="dist/styles/reset.min.css" rel="stylesheet">
+	<link href="dist/styles/index.min.css" rel="stylesheet">
+</head>
+<body>
+<header class="header">
+	<div class="container-fluid ">
+		<div class="row">
+			<div class="col-md-2">
+				<a href="index.html" class="logo"></a>
+			</div>
+			<div class="col-md-6">
+				<form class="form-inline">
+					<span class="glyphicon glyphicon-search search-icon"></span>
+					<input type="text" class="search-input form-control" placeholder="搜索···">
+					<button class="btn btn-default search-btn">搜索</button>
+				</form>	
+			</div>
+			<div class="col-md-4">
+				<div class="col-md-4">
+					<a href="javascript:;" class="h-new"><span class="glyphicon glyphicon-plus"></span>新建
+					<div class="new-pop">
+						<h3 class="np-tt">新建<span class="glyphicon glyphicon-remove np-close"></h3>
+						<div class="np-itm">
+							<h4 class="npi-tt">新建项目</h4>
+							<p class="npi-tip">项目是一组成员和一组任务、话题、日程的集合</p>
+						</div>
+						<div class="np-itm">
+							<h4 class="npi-tt">新建团队</h4>
+							<p class="npi-tip">团队是一个公司或一个部分，使用团队组织项目或成员</p>
+						</div>
+					</div>
+					</a>
+				</div>
+				<div class="col-md-4">
+					<a href="javascript:;" class="h-msg"><span class="glyphicon glyphicon-bell"></span>消息</a>
+				</div>
+				<div class="col-md-4">
+					<a href="javascript:;" class="h-user"><span class="glyphicon glyphicon-user"></span>用户
+					<div class="user-pop">
+						<h3 class="np-tt">账户<span class="glyphicon glyphicon-remove np-close"></h3>
+						<div class="np-itm">
+							<h4 class="npi-tt">团队管理</h4>
+						</div>
+						<div class="np-itm np-exit">
+							<h4 class="npi-tt">退&emsp;&emsp;出</h4>
+						</div>
+					</div>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+<article class="article">
+<aside class="aside">
+	<ul>
+		<li class="a-list cur"><span class="glyphicon glyphicon-briefcase"></span>工作台</li>
+		<li class="a-list"><span class="glyphicon glyphicon-calendar"></span>日历</li>
+		<li class="a-list"><span class="glyphicon glyphicon-eye-open"></span>发现</li>
+		<li class="a-list"><span class="glyphicon glyphicon-folder-open"></span>项目</li>
+		<li class="a-list"></li>
+	</ul>
+</aside>
+<section class="section work-space">
+	<!-- 工作台 -->
+	<header class="tt">
+		<div class="col-md-9">
+			<span class="glyphicon glyphicon-briefcase"></span>工作台
+		</div>
+		<div class="col-md-3">
+			<a class="tt-itm tt-cur">最新动态</a>
+			<a class="tt-itm">我的任务</a>
+		</div>
+	</header>
+	<div class="ws-warp">
+		<!-- <div class="col-md-8 ws-main tab1">
+			<div class="ws-tt">最新动态<a href="javascript:;" class="refrench">刷新</a></div>
+			<ul>
+				<li class="event-itm">
+					<div class="col-md-2">
+						<a href=""><img class="img-circle user-img" src="1.png" width="30" height="30"><span class="user-name">Jame</span></a>
+					</div>
+					<div class="col-md-8">
+						<p class="brief">评论了文件：海外接送机_PRD_V0.3- 前台部分.docx</p>
+					</div>
+					<div class="col-md-2 date">
+						<p>2015-12-9</p>
+						<p>12:08</p>
+					</div>
+				</li>
+			</ul>
+			<a href="javascript:;" class="btn btn-more">加载更多</a>
+		</div> -->
+		<div class="col-md-8 ws-main tab2">
+			<div class="ws-tt"><span class="tab-tt">我的任务</span>
+				<ul class="ws-2-tab-head">
+					<li class="ws-2-tab cur">待完成</li>
+					<li class="ws-2-tab">已过期</li>
+					<li class="ws-2-tab">已完成</li>
+				</ul>
+			</div>
+			<div class="ws-2-tab-body">
+				<div class="ws-2-tab">
+					<ul class="ws-2-list">
+						<li class="ws-2-item">
+							<p class="task-name">任务标题</p>
+							<p class="prom-name"><span class="glyphicon glyphicon-tasks"></span>所属项目</p>
+						</li>
+					</ul>
+				</div>
+				<div class="ws-2-tab">
+					<div class="tip-box">
+						<span class="glyphicon glyphicon-check"></span>
+						<p class="tip">没有已过期的任务</p>
+					</div>
+				</div>
+				<div class="ws-2-tab cur">
+					<ul class="ws-2-list">
+						<li class="ws-2-item">
+							<p class="finish-time">2012年12月01</p>
+							<p class="task-name">任务标题</p>
+							<p class="prom-name"><span class="glyphicon glyphicon-tasks"></span>所属项目</p>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4 ws-aside">
+			<div class="ws-ad-box">
+				<div class="ws-tt">
+					<img src="1.png" alt="" class="img-circle user-img">Mathilda
+				</div>
+				<div class="row">
+					<div class="col-md-4 aside-itm">
+						<p class="num">1</p>
+						<p>待完成任务</p>
+					</div>
+					<div class="col-md-4 aside-itm">
+						<p class="num">1</p>
+						<p>过期任务</p>
+					</div>
+					<div class="col-md-4 aside-itm last">
+						<p class="num">1</p>
+						<p>已完成任务</p>
+					</div>
+				</div>	
+			</div>
+
+			<div class="ws-ad-box">
+				<div class="ws-tt ws-plan-tt">
+					今日日程
+				</div>
+				<div class="ws-plan">
+					<div class="tip-box">
+						<span class="glyphicon glyphicon-bookmark"></span>
+						<p class="tip">今天没有日程安排</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="section team-management">
+	<!-- 团队管理 -->
+	<header class="tt"><span class="glyphicon glyphicon-print"></span>团队管理 <a class="btn new-team-btn">新建团队</a></header>
+	<div class="tm-itm">
+		<h2 class="tmi-tt">我的团队</h2>
+		<table class="tmi-table">
+			<thead>
+				<tr>
+					<th>团队名</th>
+					<th>所有者</th>
+					<th>权限</th>
+					<th>管理</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>接送产品团队</td>
+					<td>James</td>
+					<td>成员</td>
+					<td><a class="btn team-exit-btn">退出</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</section>
+<section class="section discover">
+	<!-- 发现 -->
+	<header class="tt">
+		<div class="col-md-9">
+			<span class="glyphicon glyphicon-eye-open"></span>发现
+		</div>
+		<div class="col-md-3">
+			<a class="tt-itm tt-cur">任务</a>
+			<a class="tt-itm">话题</a>
+		</div>
+	</header>
+	<div class="d-itm">
+		<header class="tt">
+			<span class="dit-tt">任务</span>
+			<ul class="dit-tab">
+				<li class="ditt-itm cur">全部</li>
+				<li class="ditt-itm">分配给我的</li>
+				<li class="ditt-itm">我创建的</li>
+				<li class="ditt-itm">我关注的</li>
+			</ul>
+		</header>
+		<div class="ws-2-tab cur">
+			<ul class="ws-2-list">
+				<li class="ws-2-item">
+					<p class="finish-time">2012年12月01</p>
+					<p class="task-name">任务标题</p>
+					<p class="prom-name"><span class="glyphicon glyphicon-tasks"></span>所属项目</p>
+				</li>
+			</ul>
+		</div>
+	</div>
+</section>
+<section class="section project">
+	<header class="tt">
+		<span class="glyphicon glyphicon-folder-open"></span></span>项目
+	</header>
+	<div class="p-body">
+		<ul class="p-list">
+			<li class="p-item">
+				<h2 class="pi-tt">项目名称</h2>
+				<div class="pi-body">
+					<i class="icon-pro glyphicon glyphicon-inbox"></i>
+					<p>项目名称</p>
+				</div>
+			</li>
+		</ul>
+	</div>
+</section>
+<section class="section project-detail">
+	<!-- 项目详情 -->
+	<header class="tt">
+		<span class="glyphicon glyphicon-inbox"></span>项目名称
+		<!-- <a href="javascript:;" class="btn new-task-list-btn">新建列表</a> -->
+	</header>
+	<div class="p-body">
+		<ul class="pb-list">
+			<li class="pbl-item">
+				<ul class="pbli-list">
+					<li class="pblil-item pblil-tt">列表名称</li>
+					<li class="pblil-item">
+						<input type="checkbox" class="task-checkbox">&nbsp;<a href="javascript:;" class="pblil-task pblil-finished">任务内容</a>
+					</li>
+					<li class="pblil-item">
+						<input type="checkbox" class="task-checkbox">&nbsp;<a href="javascript:;" class="pblil-task">任务内容</a>
+					</li>
+					<li class="pblil-item pblil-new">
+						<a class="pblil-new-btn" href="javascript:;">新建任务</a>
+					</li>
+				</ul>
+			</li>
+			<li class="pbl-item">
+				<ul class="pbli-list">
+					<li class="pblil-item pblil-tt">列表名称</li>
+					<li class="pblil-item">
+						<input type="checkbox" class="task-checkbox">&nbsp;<a href="javascript:;" class="pblil-task">任务内容</a>
+					</li>
+					<li class="pblil-item">
+						<input type="checkbox" class="task-checkbox">&nbsp;<a href="javascript:;" class="pblil-task">任务内容</a>
+					</li>
+					<li class="pblil-item pblil-new">
+						<a class="pblil-new-btn" href="javascript:;" style="display:none">新建任务</a>
+						<div class="pblil-new-form">
+							<textarea class="pblil-textarea"></textarea>
+							<a href="javascript:;" class="btn pblil-sav-btn">保存</a>
+							<a href="javascript:;" class="btn pblil-cle-btn">取消</a>
+						</div>
+					</li>
+				</ul>
+			</li>
+			<li class="pbl-item pbl-item-new">
+				<ul class="pbli-list">
+					<li class="pblil-item pblil-tt pblil-new">
+						<a class="pblil-new-btn" href="javascript:;">新建列表</a>
+						<div class="pblil-new-form">
+							<input class="pblil-input" placeholder="请输入列表名">
+							<a href="javascript:;" class="btn pblil-sav-btn">保存</a>
+							<a href="javascript:;" class="btn pblil-cle-btn">取消</a>
+						</div>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</section>
+<section class="section message-center">
+	<header class="tt">
+		<span class="glyphicon glyphicon-bell"></span>消息中心
+	</header>
+	<div class="ms-body">
+		<header class="ms-tt">
+			<ul class="ms-tabs-head">
+				<li class="ms-tabs cur">未读</li>
+				<li class="ms-tabs">待处理</li>
+				<li class="ms-tabs">已读</li>
+			</ul>
+		</header>
+		<div class="ms-tabs-body">
+			<ul>
+				<li  class="ms-tabs-item">
+					<ul class="ms-list">
+						<li class="msl-item clearfix">
+							<div class="col-md-3">
+								<i class="user-img">J</i>james
+							</div>
+							<div class="col-md-7">
+								评论了文件：海外接送机_PRD_V0.3- 前台部分.docx
+							</div>
+							<div class="col-md-2">
+								<p>2015-12-07</p>
+								<p>17:35</p>
+							</div>		
+						</li>
+					</ul>
+				</li>
+				<li  class="ms-tabs-item cur">
+					<div class="mstb-tip-box">
+					<span class="glyphicon glyphicon-bell icon-bell"></span>
+					<p class="mstb-tip">没有待处理文件</p>
+					</div>
+				</li>
+				<li  class="ms-tabs-item">
+					<ul class="ms-list">
+						<li class="msl-item">
+							<div class="col-md-3">
+								<i class="user-img">J</i>james
+							</div>
+							<div class="col-md-7">
+								评论了文件：海外接送机_PRD_V0.3- 前台部分.docx
+							</div>
+							<div class="col-md-2">
+								<p>2015-12-07</p>
+								<p>17:35</p>
+							</div>		
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+</section>
+<section class="fixed task-detail">
+	<!-- 任务详情 -->
+	<header class="tt">
+		项目名称
+		<div class="tt_right">
+			<span class="tt_item"><span class="glyphicon glyphicon-time"></span>riqi</span>
+		</div>
+	</header>
+</section>
+</article>
+</body>
+</html>
