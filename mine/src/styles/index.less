@@ -55,6 +55,7 @@ body{
 		border:1px solid @bordergray;
 		background: #fff;
 		z-index: 1;
+		box-shadow: 0 0 40px #f1f1f1 inset;
 	}
 	.new-pop{
 		width:350px;
@@ -63,11 +64,18 @@ body{
 	.user-pop{
 		width: 150px;
 		left: -50px;
+		.up-li{
+			padding:10px 20px;
+			color:@gray;
+		}
+		.up-exit:hover{
+			color:@itemcolor;
+		}
 	}
 	.np-tt{
 		font-size: 18px;
 		border-bottom: 1px solid @bordergray;
-		padding:10px 20px;
+		padding:8px 20px;
 		color:@blank;
 	}
 	.np-close{
@@ -87,7 +95,6 @@ body{
 	.np-exit{
 		&:hover{
 			color:#fff;
-			background: @itemcolor;
 		}
 	}
 	.npi-tt{
@@ -112,6 +119,7 @@ body{
 		padding-left: 20px;
 		line-height: 45px;
 		overflow: auto;
+		cursor: pointer;
 		&:hover{
 			background:rgba(0,0,0,.5);
 		}
@@ -126,7 +134,8 @@ body{
 	position:absolute;
 	top:0;
 	left:0;
-	padding-left: 220px;
+	margin-left: 220px;
+	padding-right: 220px;
 	width:100%;
 	height:100%;
 	overflow-y: scroll;
@@ -150,11 +159,12 @@ body{
 }
 // 工作台
 .work-space{
-	display: none;
+	// display: none;
 	.ws-warp{
 		padding:15px;
 	}
 	.ws-main{
+		display: none;
 		border:1px solid @bordergray;
 		box-shadow: 0 1px 1px #c1c1c1;
 		padding:15px;
@@ -165,6 +175,9 @@ body{
 			font-size: 16px;
 			border-bottom: 1px solid @bordergray;
 		}
+	}
+	.ws-main.cur{
+		display: block;
 	}
 	.tab1{
 		.refrench{
@@ -201,6 +214,7 @@ body{
 		}
 		.ws-2-tab-head{
 			float:left;
+			cursor: pointer;
 			.cur{
 				border-bottom: 2px solid @itemcolor;
 			}
@@ -585,6 +599,7 @@ body{
 }
 // 任务详情
 .task-detail{
+	display: none;
 	.tt{
 		height:45px;
 		width:100%;
