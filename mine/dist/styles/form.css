@@ -1,0 +1,19 @@
+.form-box {
+  width: 1000px;
+  height: 320px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -500px;
+  margin-top: -260px;
+  padding: 15px;
+  border: 1px solid #e1e1e1;
+  box-shadow: 0 0 5px #e1e1e1;
+}
+.form-box .tt {
+  font-size: 18px;
+  padding: 15px 0;
+  border-bottom: 1px solid #e1e1e1;
+  color: #151515;
+  margin-bottom: 15px;
+}
