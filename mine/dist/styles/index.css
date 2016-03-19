@@ -59,6 +59,31 @@ body {
   width: 350px;
   left: -100px;
 }
+.header .new-pop label {
+  padding: 10px 0;
+}
+.header .new-pop .new-input,
+.header .new-pop .new-select,
+.header .new-pop .new-textarea {
+  width: 100%;
+  border: 1px solid #e1e1e1;
+  border-radius: 5px;
+  padding: 8px 8px;
+}
+.header .new-pop .sub {
+  margin-top: 20px;
+  margin-right: 20px;
+  padding: 8px 30px;
+  background: #41c1a2;
+  color: #fff;
+}
+.header .new-pop .cle {
+  margin-top: 20px;
+  padding: 8px 30px;
+  background: #f1f1f1;
+  color: #252525;
+  border: 1px solid #e1e1e1;
+}
 .header .user-pop {
   width: 150px;
   left: -50px;
@@ -281,18 +306,40 @@ body {
   font-size: 42px;
   padding: 20px;
 }
-.team-management {
-  display: none;
-}
 .team-management .tt .new-team-btn {
   float: right;
   background: #992200;
   color: #fff;
   height: 35px;
   width: 125px;
-  line-height: 35px;
+  line-height: 21px;
   margin-top: 5px;
   font-size: 12px;
+}
+.team-management .tt .new-team-btn .new-pop label {
+  padding: 10px 0;
+}
+.team-management .tt .new-team-btn .new-pop .new-input,
+.team-management .tt .new-team-btn .new-pop .new-select,
+.team-management .tt .new-team-btn .new-pop .new-textarea {
+  width: 100%;
+  border: 1px solid #e1e1e1;
+  border-radius: 5px;
+  padding: 8px 8px;
+}
+.team-management .tt .new-team-btn .new-pop .sub {
+  margin-top: 20px;
+  margin-right: 20px;
+  padding: 8px 30px;
+  background: #41c1a2;
+  color: #fff;
+}
+.team-management .tt .new-team-btn .new-pop .cle {
+  margin-top: 20px;
+  padding: 8px 30px;
+  background: #f1f1f1;
+  color: #252525;
+  border: 1px solid #e1e1e1;
 }
 .team-management .tm-itm {
   width: 96%;
@@ -326,9 +373,6 @@ body {
   border: 1px solid #e1e1e1;
   text-align: center;
 }
-.discover {
-  display: none;
-}
 .discover .d-itm {
   width: 96%;
   height: 100%;
@@ -353,6 +397,7 @@ body {
 .discover .d-itm .ditt-itm {
   float: left;
   padding: 0 20px;
+  cursor: pointer;
 }
 .discover .d-itm .ditt-itm.cur {
   border-bottom: 3px solid #992200;
@@ -389,9 +434,6 @@ body {
 .discover .d-itm .cur {
   display: block;
 }
-.project {
-  display: none;
-}
 .project .p-body {
   width: 100%;
   padding: 40px;
@@ -415,9 +457,6 @@ body {
   font-size: 34px;
   padding: 30px 0 10px 0;
   color: #992200;
-}
-.project-detail {
-  display: none;
 }
 .project-detail .tt .new-task-list-btn {
   float: right;
@@ -485,7 +524,7 @@ body {
 }
 .project-detail .p-body .pbl-item .pblil-new .pblil-cle-btn {
   color: #41c1a2;
-  border: 1px solid #41c1a1;
+  border: 1px solid #41c1a2;
 }
 .project-detail .p-body .pbl-item .pblil-new-btn {
   color: #992200;
@@ -499,9 +538,6 @@ body {
 .project-detail .p-body .pbl-item .pblil-task.pblil-finished {
   color: #777;
   text-decoration: line-through !important;
-}
-.message-center {
-  display: none;
 }
 .message-center .ms-body {
   width: 96%;
@@ -521,6 +557,8 @@ body {
 .message-center .ms-body .ms-tt .ms-tabs {
   float: left;
   margin-right: 30px;
+  padding: 0 10px;
+  cursor: pointer;
 }
 .message-center .ms-body .ms-tt .ms-tabs.cur {
   border-bottom: 3px solid #992200;
@@ -534,6 +572,7 @@ body {
 .message-center .ms-body .ms-tabs-body .ms-tabs-item .msl-item {
   padding: 10px 0;
   border-bottom: 1px solid #e1e1e1;
+  overflow: hidden;
 }
 .message-center .ms-body .ms-tabs-body .ms-tabs-item .user-img {
   margin-right: 10px;
@@ -562,9 +601,6 @@ body {
   background: #fff;
   border: 1px solid #e1e1e1;
   box-shadow: 0 0 3px #e1e1e1;
-}
-.task-detail {
-  display: none;
 }
 .task-detail .tt {
   height: 45px;

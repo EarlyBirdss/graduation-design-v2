@@ -6,10 +6,10 @@
 </head>
 <body>
 <!-- 引入字体库 -->
-<link rel="stylesheet" href="plugin/font-awesome-4.3.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../plugin/font-awesome-4.3.0/css/font-awesome.min.css">
 <!-- 引入字体库 -->
-<link href="dist/styles/base.css" rel="stylesheet" type="text/css">
-<link href="dist/styles/reset.css" rel="stylesheet" type="text/css">
+<link href="../dist/styles/base.css" rel="stylesheet" type="text/css">
+<link href="../dist/styles/reset.css" rel="stylesheet" type="text/css">
 	<div class="header">
 		<div class="content">
 			<div class="logo"></div>
@@ -18,8 +18,8 @@
 				<button type="submit" class="s-btn"><i class="fa fa-search"></i></button>
 			</div>
 			<div class="user-info">
-				<a href="javascript:;" class="u-item">登录</a>
-				<a href="javascript:;" class="u-item">注册</a>
+				<a href="/login" class="u-item">登录</a>
+				<a href="/regiter" class="u-item">注册</a>
 			</div>
 		</div>
 	</div><!-- header -->
@@ -27,15 +27,18 @@
 <link rel="stylesheet" href="dist/styles/register.css">
 <div class="register-box">
 <h2 class="l-title">用户注册</h2>
-	<form>
-		<label>用户名</label><input type="text" class="l-input" placeholder="用户名">
-		<label>密&emsp;码</label><input type="password" class="l-input" placeholder="密码">
+	<form action="/submitRegister" type="post">
+		<label>用户名</label><input type="text" class="l-input" placeholder="用户名" id="username" name="username">
+		<label>密&emsp;码</label><input type="password" class="l-input" placeholder="密码" id="password" name="password">
 		<button type="submit" class="l-btn">注册</button>
 	</form>
 </div>
 	</div><!-- main-body -->
-	<div class="footer">
+<div class="footer">
 	<p>&copy; 2015&emsp;江西师大计算机科学与技术学院科技2班许少芬</p>
-	</div>
+</div>
+
+<script type="text/javascript" src="../plugin/jquery/jquery.js"></script>
+<script type="text/javascript" src="../src/scripts/register.js"></script>
 </body>
 </html>

@@ -21,13 +21,12 @@ function Tab(option){
 Tab.prototype = {
 	constructor: "Tab",
 	init: function(){
-		console.log("init");
 		this.addLitener();
 	},
 	addLitener: function(){
 		var that = this;
 		var option = that.option;
-		$(that.tabHead).on("click",option.headItem,function(){
+		$("body").on("click",option.headItem,function(){
 			that.changeTab(this);
 		});
 
@@ -35,9 +34,7 @@ Tab.prototype = {
 	changeTab: function(clickItem){
 		var $clickItem = $(clickItem)
 		var index = $(this.tabHead).find(this.option.headItem).index($clickItem);
-		console.log(index);
 		var $bodyItem = $(this.tabBody).find(this.option.bodyItem).eq(index);
-		console.log($bodyItem);
 		$clickItem.addClass(this.option.headCurClass).siblings().removeClass(this.option.headCurClass);
 		$bodyItem.addClass(this.option.bodyCurClass).siblings().removeClass(this.option.bodyCurClass);
 

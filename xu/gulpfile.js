@@ -68,7 +68,7 @@ gulp.task('concat',function() {
         .pipe(contentIncluder({
             includerReg:/<!\-\-include\s+"([^"]+)"\-\->/g
         }))
-        .pipe(gulp.dest('./'));
+        .pipe(gulp.dest('view'));
 });
 
 // 预设任务
@@ -96,7 +96,7 @@ gulp.task('watch', function() {
 
   // 看守所有位在 dist/  目录下的档案，一旦有更动，便进行重整
   gulp.watch(['dist/**']).on('change', function(file) {
-    server.changed(file.path);
+    // server.changed(file.path);
   });
 
 });

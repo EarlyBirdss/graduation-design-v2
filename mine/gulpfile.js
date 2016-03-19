@@ -64,11 +64,11 @@ gulp.task('server',function(){
 
 //连接页面
 gulp.task('concat',function() {
-    gulp.src("./pages/*.html")
+    gulp.src("pages/*.html")
         .pipe(contentIncluder({
             includerReg:/<!\-\-include\s+"([^"]+)"\-\->/g
         }))
-        .pipe(gulp.dest('./views'));
+        .pipe(gulp.dest('views'));
 });
 
 // 预设任务

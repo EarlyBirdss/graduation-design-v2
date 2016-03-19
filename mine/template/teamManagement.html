@@ -1,6 +1,25 @@
 <section class="section team-management">
 	<!-- 团队管理 -->
-	<header class="tt"><span class="glyphicon glyphicon-print"></span>团队管理 <a class="btn new-team-btn">新建团队</a></header>
+	<header class="tt"><span class="glyphicon glyphicon-print"></span>团队管理 
+	<a class="btn new-team-btn">新建团队</a>
+	<div class="new-pop J_new_team_pop">
+		<h3 class="np-tt">新建</h3>
+		<ul class="form">
+			<li>
+				<label for="projectName">团队名称</label>
+				<input class="new-input" type="text" placeholder="团队名称" id="projectName">
+			</li>
+			<li>
+				<label for="projectOwer">团队描述</label>
+				<textarea class="new-textarea" name="" id="" cols="30" rows="10" placeholder="为团队添加简短描述（可选）"></textarea>
+			</li>
+			<li>
+				<button class="btn sub J_btn_new_team">创建</button>
+				<button class="btn cle J_new_cle">取消</button>
+			</li>
+		</ul>
+	</div>
+	</header>
 	<div class="tm-itm">
 		<h2 class="tmi-tt">我的团队</h2>
 		<table class="tmi-table">

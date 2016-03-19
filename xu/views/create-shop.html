@@ -17,37 +17,65 @@
 				<input type="text" plasehold="搜索商户或商品" class="s-input">
 				<button type="submit" class="s-btn"><i class="fa fa-search"></i></button>
 			</div>
-			<div class="user-info">
-				<a href="javascript:;" class="u-item">登录</a>
-				<a href="javascript:;" class="u-item">注册</a>
-			</div>
 		</div>
 	</div><!-- header -->
 	<div class="main-body">
-<link rel="stylesheet" href="dist/styles/create-shop.min.css">
+<link rel="stylesheet" href="../dist/styles/create-shop.min.css">
 <div class="warp">
 	<h1 class="tt">新增店铺</h1>
-	<form>
+	<form id="form">
 		<div class="row">
 			<label class="label" for="name">店铺名称</label>
-			<input type="text" class="input" placehold="请输入店铺名称" id="name">
+			<input type="text" class="input" placeholder="请输入店铺名称" id="title" name="title" value="">
 		</div>
 		<div class="row">
 			<label class="label" for="address">店铺地址</label>
-			<input type="text" class="input" placehold="请输入店铺地址" id="address">
+			<input type="text" class="input" placeholder="请输入店铺地址" id="address" name="address" value="">
+		</div>
+		<div class="row">
+			<label class="label" for="type">店铺类型</label>
+			<select name="type" id="type" class="input">
+				<option value="1">家常快餐</option>
+				<option value="2">特色小吃</option>
+				<option value="3">燒烤海鮮</option>
+				<option value="4">鮮花蛋糕</option>
+				<option value="5">茶品飲料</option>
+			</select>
+			<!-- <input type="text" class="input" placeholder="请选择店铺类型" id="type" name="type" value=""> -->
+		</div>
+		<div class="row">
+			<label class="label" for="notice">起送价</label>
+			<input type="text" class="input" placeholder="请输入店铺起送价" id="startingprice" name="startingprice" value="">
+		</div>
+		<div class="row">
+			<label class="label" for="notice">配送费</label>
+			<input type="text" class="input" placeholder="请输入店铺配送费" id="distributionfee" name="distributionfee" value="">
+		</div>
+		<div class="row">
+			<label class="label" for="notice">配送时间</label>
+			<input type="text" class="input" placeholder="请输入店铺配送时间，如30分钟" id="distributiontime" name="distributiontime" value="">
+		</div>
+		<div class="row">
+			<label class="label" for="notice">起送时间</label>
+			<input type="text" class="input" placeholder="请输入店铺起送时间，如9:00营业" id="beginetime" name="beginetime" value="">
+		</div>
+		<div class="row">
+			<label class="label" for="notice">终送时间</label>
+			<input type="text" class="input" placeholder="请输入店铺终止时间，如19:30关门" id="endtime" name="endtime" value="">
 		</div>
 		<div class="row">
 			<label class="label" for="notice">店铺公告</label>
-			<input type="text" class="input" placehold="请输入店铺名称" id="notice">
+			<textarea name="notice" id="notice" cols="30" rows="10" class="textarea"></textarea>
+			<!-- <input type="text" class="input" placeholder="请输入店铺名称" id="notice" name="notice" value=""> -->
 		</div>
 		<div class="row file-row">
 			<label class="label" for="poster">店铺海报</label>
-			<input type="text" class="input file-input" placehold="请上传店铺海报" id="poster">
+			<input type="text" class="input file-input" placeholder="请上传店铺海报" id="validate_poster" name="validate_poster">
 			<input type="button" class="file-unload" value="上传">
-			<input type="file" id="file" class="file">
+			<input type="file" id="poster" name="poster" class="file">
 		</div>
 		<div class="row">
-			<button type="submit" class="btn_sub">提交</button>
+			<button type="submit" class="btn_sub J_btn_submit">提交</button>
 		</div>
 	</form>
 </div>
@@ -55,5 +83,9 @@
 	<div class="footer">
 	<p>&copy; 2015&emsp;江西师大计算机科学与技术学院科技2班许少芬</p>
 	</div>
+
+<script type="text/javascript" src="../plugin/jquery/jquery.js"></script>
+<script type="text/javascript" src="../plugin/validate/jquery.validate.js"></script>
+<script type="text/javascript" src="../src/scripts/edit-shop.js"></script>
 </body>
 </html>

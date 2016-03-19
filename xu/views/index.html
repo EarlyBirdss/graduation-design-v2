@@ -6,10 +6,10 @@
 </head>
 <body>
 <!-- 引入字体库 -->
-<link rel="stylesheet" href="plugin/font-awesome-4.3.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../plugin/font-awesome-4.3.0/css/font-awesome.min.css">
 <!-- 引入字体库 -->
-<link href="dist/styles/base.css" rel="stylesheet" type="text/css">
-<link href="dist/styles/reset.css" rel="stylesheet" type="text/css">
+<link href="../dist/styles/base.css" rel="stylesheet" type="text/css">
+<link href="../dist/styles/reset.css" rel="stylesheet" type="text/css">
 	<div class="header">
 		<div class="content">
 			<div class="logo"></div>
@@ -18,8 +18,8 @@
 				<button type="submit" class="s-btn"><i class="fa fa-search"></i></button>
 			</div>
 			<div class="user-info">
-				<a href="javascript:;" class="u-item">登录</a>
-				<a href="javascript:;" class="u-item">注册</a>
+				<a href="/login" class="u-item">登录</a>
+				<a href="/register" class="u-item">注册</a>
 			</div>
 		</div>
 	</div><!-- header -->
@@ -44,15 +44,8 @@
 	<li class="o-item">评分</li>
 </ul>
 <div class="shop-wrap">
-	<div class="s-item">
-		<img src="1.png" alt="" class="s-img"/>
-		<div class="s-des-box">
-			<p class="s-title">餐厅名称</p>
-			<div><i class="fa fa-star color"></i><i class="fa fa-star-half-o color"></i><span class="s-des">月售12份</span></div>
-			<div><span class="s-des">起送：￥20</span><span class="s-des">起送：￥20</span><span class="s-time">1小时</span></div>
-		</div>
-	</div>
-	<div class="s-item">
+	{{shoplist}}
+	<!-- <div class="s-item">
 		<img src="1.png" alt="" class="s-img"/>
 		<div class="s-des-box">
 			<p class="s-title">餐厅名称</p>
@@ -139,7 +132,7 @@
 			<div><i class="fa fa-star color"></i><i class="fa fa-star-half-o color"></i><span class="s-des">月售12份</span></div>
 			<div><span class="s-des">起送：￥20</span><span class="s-time">1小时</span></div>
 		</div>
-	</div>
+	</div> -->
 </div>
 <!-- back-top start-->
 <div class="back-top fa fa-chevron-up">

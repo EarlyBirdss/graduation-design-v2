@@ -6,10 +6,10 @@
 </head>
 <body>
 <!-- 引入字体库 -->
-<link rel="stylesheet" href="plugin/font-awesome-4.3.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../plugin/font-awesome-4.3.0/css/font-awesome.min.css">
 <!-- 引入字体库 -->
-<link href="dist/styles/base.css" rel="stylesheet" type="text/css">
-<link href="dist/styles/reset.css" rel="stylesheet" type="text/css">
+<link href="../dist/styles/base.css" rel="stylesheet" type="text/css">
+<link href="../dist/styles/reset.css" rel="stylesheet" type="text/css">
 	<div class="header">
 		<div class="content">
 			<div class="logo"></div>
@@ -18,33 +18,33 @@
 				<button type="submit" class="s-btn"><i class="fa fa-search"></i></button>
 			</div>
 			<div class="user-info">
-				<a href="javascript:;" class="u-item">登录</a>
-				<a href="javascript:;" class="u-item">注册</a>
+				<a href="/login" class="u-item">登录</a>
+				<a href="/register" class="u-item">注册</a>
 			</div>
 		</div>
 	</div><!-- header -->
 	<div class="main-body">
 <link rel="stylesheet" href="dist/styles/detail.css">
-<div class="bread">首页&gt;祥记黄焖鸡米饭</div>
+<div class="bread">首页&gt;{{shop.title}}</div>
 <div class="shop-des">
-	<img src="1.png" alt="祥记黄焖鸡米饭" class="s-img">
+	<img src="1.png" alt="{{shop.title}}" class="s-img">
 	<div class="s-center">
-		<p class="s-title">祥记黄焖鸡米饭</p>
-		<p>餐饮&ensp;<i class="fa fa-star"></i><i class="fa fa-star-empty"></i>&ensp;<span class="grade">4.3分</span></p>
-		<p>接单时间：&ensp;8:00-21:00</p>
-		<p>商铺地址：&ensp;水井坊辖区点将台街（路）40号</p>
+		<p class="s-title">{{shop.title}}</p>
+		<!-- <p>餐饮&ensp;<i class="fa fa-star"></i><i class="fa fa-star-empty"></i>&ensp;<span class="grade">4.3分</span></p> -->
+		<p>接单时间：&ensp;{{shop.startsale}}-{{shop.endsale}}</p>
+		<p>商铺地址：&ensp;{{shop.address}}</p>
 	</div>
 	<div class="s-right">
 		<div class="s-item">
-			<p class="s-val">30分钟</p>
+			<p class="s-val">{{shop.distributiontime}}</p>
 			<p class="s-label">平均送达时间</p>
 		</div>
 		<div class="s-item">
-			<p class="s-val">￥0</p>
+			<p class="s-val">￥{{shop.startingprice}}</p>
 			<p class="s-label">起送价</p>
 		</div>
 		<div class="s-item">
-			<p class="s-val">￥0</p>
+			<p class="s-val">￥{{shop.distributionfee}}</p>
 			<p class="s-label">配送费</p>
 		</div>
 	</div>
@@ -69,6 +69,19 @@
 <div class="menu-list">
 	<h2 class="m-title">热销菜品</h2>
 	<ul>
+	{{each shop.dish as value i}}
+		<li class="l-item">
+			<img src="1.png" alt="title" class="l-img">
+			<div class="l-info">
+				<p class="l-title">黄焖鸡+米饭</p>
+				<p class="sale-vol">已售：{{value.salenum}}份</p>
+				<div class="l-bottom">
+					<span class="l-price">￥{{value.price}}</span>
+					<i class="fa fa-plus"></i>
+				</div>
+			</div>
+		</li>
+		{{/each}}<!-- 
 		<li class="l-item">
 			<img src="1.png" alt="title" class="l-img">
 			<div class="l-info">
@@ -90,18 +103,7 @@
 					<i class="fa fa-plus"></i>
 				</div>
 			</div>
-		</li>
-		<li class="l-item">
-			<img src="1.png" alt="title" class="l-img">
-			<div class="l-info">
-				<p class="l-title">黄焖鸡+米饭</p>
-				<p class="sale-vol">已售：221份</p>
-				<div class="l-bottom">
-					<span class="l-price">￥21</span>
-					<i class="fa fa-plus"></i>
-				</div>
-			</div>
-		</li>
+		</li> -->
 	</ul>
 </div>
 <!-- menu-list END -->

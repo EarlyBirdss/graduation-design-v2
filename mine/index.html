@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,38 +15,74 @@
 				<a href="index.html" class="logo"></a>
 			</div>
 			<div class="col-md-6">
-				<form class="form-inline">
+				<div class="form-inline">
 					<span class="glyphicon glyphicon-search search-icon"></span>
 					<input type="text" class="search-input form-control" placeholder="搜索···">
 					<button class="btn btn-default search-btn">搜索</button>
-				</form>	
+				</div>	
 			</div>
 			<div class="col-md-4">
 				<div class="col-md-4">
 					<a href="javascript:;" class="h-new J_new"><span class="glyphicon glyphicon-plus"></span>新建
 					<div class="new-pop J_new_pop">
 						<h3 class="np-tt">新建<span class="glyphicon glyphicon-remove np-close"></h3>
-						<div class="np-itm">
+						<div class="np-itm J_new_project" data-type="">
 							<h4 class="npi-tt">新建项目</h4>
 							<p class="npi-tip">项目是一组成员和一组任务、话题、日程的集合</p>
 						</div>
-						<div class="np-itm">
+						<div class="np-itm J_new_team">
 							<h4 class="npi-tt">新建团队</h4>
 							<p class="npi-tip">团队是一个公司或一个部分，使用团队组织项目或成员</p>
 						</div>
 					</div>
+					<div class="new-pop J_new_project_pop">
+						<h3 class="np-tt">新建</h3>
+						<ul class="form">
+							<li>
+								<label for="projectName">项目名称</label>
+								<input class="new-input" type="text" placeholder="项目名称" id="projectName">
+							</li>
+							<li>
+								<label for="projectOwer">项目所属团队</label>
+								<select class="new-select" name="projectOwer" id="projectOwer">
+									<option value=""></option>
+								</select>
+							</li>
+							<li>
+								<button class="btn sub J_btn_new_project">创建</button>
+								<button class="btn cle J_new_cle">取消</button>
+							</li>
+						</ul>
+					</div>
+					<div class="new-pop J_new_team_pop">
+						<h3 class="np-tt">新建</h3>
+						<ul class="form">
+							<li>
+								<label for="projectName">团队名称</label>
+								<input class="new-input" type="text" placeholder="团队名称" id="projectName">
+							</li>
+							<li>
+								<label for="projectOwer">团队描述</label>
+								<textarea class="new-textarea" name="" id="" cols="30" rows="10" placeholder="为团队添加简短描述（可选）"></textarea>
+							</li>
+							<li>
+								<button class="btn sub J_btn_new_team">创建</button>
+								<button class="btn cle J_new_cle">取消</button>
+							</li>
+						</ul>
+					</div>
 					</a>
 				</div>
 				<div class="col-md-4">
-					<a href="javascript:;" class="h-msg"><span class="glyphicon glyphicon-bell"></span>消息</a>
+					<a href="javascript:;" class="h-msg J_msg" data-type="messageCenter"><span class="glyphicon glyphicon-bell"></span>消息</a>
 				</div>
 				<div class="col-md-4">
 					<a href="javascript:;" class="h-user J_user"><span class="glyphicon glyphicon-user"></span>用户
 					<div class="user-pop J_user_pop">
 						<h3 class="np-tt">账&emsp;&emsp;户<span class="glyphicon glyphicon-remove np-close"></h3>
 						<ul>
-							<li class="up-li">团队管理</li>
-							<li class="up-li up-exit">退&emsp;&emsp;出</li>
+							<li class="up-li J_team_manage" data-type="teamManagement">团队管理</li>
+							<li class="up-li up-exit J_user_exit">退&emsp;&emsp;出</li>
 						</ul>
 					</div>
 					</a>
@@ -60,10 +95,8 @@
 <aside class="aside" id="J_aside">
 	<ul>
 		<li class="a-list cur" data-type="workSpace"><span class="glyphicon glyphicon-briefcase"></span>工作台</li>
-		<li class="a-list" data-type="canlendar"><span class="glyphicon glyphicon-calendar"></span>日历</li>
 		<li class="a-list" data-type="discover"><span class="glyphicon glyphicon-eye-open"></span>发现</li>
 		<li class="a-list" data-type="project"><span class="glyphicon glyphicon-folder-open"></span>项目</li>
-		<li class="a-list"></li>
 	</ul>
 </aside>
 <section class="section work-space">
@@ -167,13 +200,13 @@
 </section>
 </article>
 <script src="plugin/jquery/jquery.js"></script>
-<script src="plugin/seajs/sea.js"></script>
+<script src="plugin/seajs/sea.js" data-config="./src/scripts/config" data-main="./src/scripts/main"></script>
 <script src="src/scripts/util.js"></script>
 <script src="src/scripts/index.js"></script>
 <script>
 // seajs 的简单配置
 seajs.config({
-  base: "plugin/",
+  base: "/",
   alias: {
     "jquery": "plugin/jquery/jquery.js"
   }

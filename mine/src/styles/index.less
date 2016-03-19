@@ -2,6 +2,7 @@
 @blank:#252525;
 @bordergray:#e1e1e1;
 @gray:#777;
+@buttoncolor: #41c1a2;
 body{
 	position:fixed;
 	width:100%;
@@ -60,6 +61,35 @@ body{
 	.new-pop{
 		width:350px;
 		left:-100px;
+	}
+	.new-pop{
+		label{
+			padding: 10px 0;
+		}
+		.new-input,
+		.new-select,
+		.new-textarea{
+			width: 100%;
+			border: 1px solid @bordergray;
+			border-radius: 5px;
+			padding: 8px 8px;
+		}
+
+		.sub{
+			margin-top:20px;
+			margin-right: 20px;
+			padding: 8px 30px;
+			background: @buttoncolor;
+			color:#fff;
+		}
+
+		.cle{
+			margin-top:20px;
+			padding: 8px 30px;
+			background: #f1f1f1;
+			color:@blank;
+			border: 1px solid @bordergray;
+		}
 	}
 	.user-pop{
 		width: 150px;
@@ -306,7 +336,7 @@ body{
 }
 // 团队管理
 .team-management{
-	display: none;
+	// display: none;
 	.tt{
 		.new-team-btn{
 			float: right;
@@ -314,9 +344,38 @@ body{
 			color:#fff;
 			height: 35px;
 			width: 125px;
-			line-height: 35px;
+			line-height: 21px;
 			margin-top: 5px;
 			font-size: 12px;
+			.new-pop{
+				label{
+					padding: 10px 0;
+				}
+				.new-input,
+				.new-select,
+				.new-textarea{
+					width: 100%;
+					border: 1px solid @bordergray;
+					border-radius: 5px;
+					padding: 8px 8px;
+				}
+
+				.sub{
+					margin-top:20px;
+					margin-right: 20px;
+					padding: 8px 30px;
+					background: @buttoncolor;
+					color:#fff;
+				}
+
+				.cle{
+					margin-top:20px;
+					padding: 8px 30px;
+					background: #f1f1f1;
+					color:@blank;
+					border: 1px solid @bordergray;
+				}
+			}
 		}
 	}
 	.tm-itm{
@@ -354,7 +413,7 @@ body{
 }
 // 发现
 .discover{
-	display: none;
+	// display: none;
 	.d-itm{
 		width: 96%;
 		height: 100%;
@@ -379,6 +438,7 @@ body{
 		.ditt-itm{
 			float: left;
 			padding:0 20px;
+			cursor: pointer;
 		}
 		.ditt-itm.cur{
 			border-bottom: 3px solid @itemcolor;
@@ -419,7 +479,7 @@ body{
 }
 //项目
 .project{
-	display: none;
+	// display: none;
 	.p-body{
 		width: 100%;
 		padding:40px;
@@ -448,7 +508,7 @@ body{
 }
 // 项目详情
 .project-detail{
-	display: none;
+	// display: none;
 	.tt .new-task-list-btn{
 		float: right;
 		background: @itemcolor;
@@ -508,13 +568,13 @@ body{
 					padding:4px 18px;
 				}
 				.pblil-sav-btn{
-					background: #41c1a2;
+					background: @buttoncolor;
 					color:#fff;
 					margin-right: 10px;
 				}
 				.pblil-cle-btn{
-					color:#41c1a2;
-					border:1px solid #41c1a1;
+					color:@buttoncolor;
+					border:1px solid @buttoncolor;
 				}
 			}
 			.pblil-new-btn{
@@ -535,7 +595,7 @@ body{
 }
 // 消息中心
 .message-center{
-	display: none;
+	// display: none;
 	.ms-body{
 		width: 96%;
 		height: 100%;
@@ -552,6 +612,8 @@ body{
 			.ms-tabs{
 				float: left;
 				margin-right: 30px;
+				padding: 0 10px;
+				cursor: pointer;
 			}
 			.ms-tabs.cur{
 				border-bottom: 3px solid @itemcolor;
@@ -564,6 +626,7 @@ body{
 				.msl-item{
 					padding:10px 0;
 					border-bottom: 1px solid @bordergray;
+					overflow: hidden;
 				}
 				.user-img{
 					margin-right: 10px;
@@ -599,7 +662,7 @@ body{
 }
 // 任务详情
 .task-detail{
-	display: none;
+	// display: none;
 	.tt{
 		height:45px;
 		width:100%;
@@ -641,7 +704,7 @@ body{
 			line-height: 46px;
 		}
 		.tt-sub{
-			color:#41c1a2;
+			color:@buttoncolor;
 		}
 		.tt-textarea{
 			margin-top: 10px;
@@ -658,14 +721,14 @@ body{
 				padding:6px 15px;
 			}
 			.btn-save{
-				background:#41c1a2;
+				background:@buttoncolor;
 				color:#fff;
 				margin-right: 15px;
 			}
 			.btn-cle{
 				background: #fff;
-				border:1px solid #41c1a2;
-				color:#41c1a2;
+				border:1px solid @buttoncolor;
+				color:@buttoncolor;
 			}
 		}
 		.tab-head{
@@ -711,7 +774,7 @@ body{
 				margin-top:20px;
 			}
 			.nc-btn{
-				background: #41c1a2;
+				background: @buttoncolor;
 				color:#fff;
 				padding:6px 20px;
 			}

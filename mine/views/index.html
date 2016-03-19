@@ -362,5 +362,16 @@
 	</header>
 </section>
 </article>
+<script>
+// seajs 的简单配置
+seajs.config({
+  base: "plugin/",
+  alias: {
+    "jquery": "plugin/jquery/jquery.js"
+  }
+});
+
+seajs.use("./src/scripts/login.js");
+</script>
 </body>
 </html>

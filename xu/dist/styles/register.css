@@ -1,5 +1,8 @@
 body {
-  background: #ffccdd;
+  background: #ffefef;
+}
+.main-body {
+  min-height: 300px;
 }
 .register-box {
   background: #fff;
@@ -30,9 +33,4 @@ body {
   font-weight: bold;
   background: #ff99cc;
   margin-top: 10px;
-}
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
 }
