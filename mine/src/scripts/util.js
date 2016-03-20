@@ -8,6 +8,9 @@ function Tab(option){
 		bodyCurClass: "cur",
 		headItem: "",
 		bodyItem: "",
+		beforeClick: function(){
+
+		},
 		callback:function(){
 
 		}
@@ -27,11 +30,14 @@ Tab.prototype = {
 		var that = this;
 		var option = that.option;
 		$("body").on("click",option.headItem,function(){
-			that.changeTab(this);
+			if(typeof that.option.beforeClick === "function"){
+				that.option.beforeClick();
+			}
+			that.click(this);
 		});
 
 	},
-	changeTab: function(clickItem){
+	click: function(clickItem){
 		var $clickItem = $(clickItem)
 		var index = $(this.tabHead).find(this.option.headItem).index($clickItem);
 		var $bodyItem = $(this.tabBody).find(this.option.bodyItem).eq(index);

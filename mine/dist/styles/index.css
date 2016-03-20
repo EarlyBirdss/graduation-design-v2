@@ -16,6 +16,8 @@ body {
   text-align: center;
   font-size: 20px;
   color: #992200;
+  vertical-align: middle;
+  margin-right: 10px;
 }
 .header {
   height: 79px;
@@ -53,7 +55,6 @@ body {
   border: 1px solid #e1e1e1;
   background: #fff;
   z-index: 1;
-  box-shadow: 0 0 40px #f1f1f1 inset;
 }
 .header .new-pop {
   width: 350px;
@@ -203,6 +204,7 @@ body {
   padding: 15px;
   overflow: auto;
   border-bottom: 1px solid #e1e1e1;
+  cursor: pointer;
 }
 .work-space .tab1 .event-itm .brief {
   font-size: 16px;
@@ -289,6 +291,7 @@ body {
   margin: 10px 0;
   text-align: center;
   border-right: 1px solid #e1e1e1;
+  cursor: pointer;
 }
 .work-space .ws-aside .last {
   border: none;
@@ -576,6 +579,7 @@ body {
 }
 .message-center .ms-body .ms-tabs-body .ms-tabs-item .user-img {
   margin-right: 10px;
+  vertical-align: middle;
 }
 .message-center .ms-body .ms-tabs-body .ms-tabs-item .mstb-tip-box {
   text-align: center;
@@ -596,7 +600,7 @@ body {
   position: fixed;
   top: 79px;
   right: 0;
-  width: 65%;
+  width: 0;
   height: 100%;
   background: #fff;
   border: 1px solid #e1e1e1;
@@ -637,6 +641,7 @@ body {
   float: left;
   margin-right: 10px;
   font-size: 16px;
+  vertical-align: middle;
 }
 .task-detail .task-info .ti-tt {
   font-size: 20px;
@@ -732,6 +737,7 @@ body {
 }
 .task-detail .task-aside .user-img {
   font-size: 16px;
+  vertical-align: middle;
 }
 .task-detail .task-aside .circle-border {
   display: inline-block;
@@ -741,4 +747,72 @@ body {
   border-radius: 50%;
   text-align: center;
   line-height: 35px;
+}
+.task-list .task-status-list {
+  margin: 20px;
+  overflow: hidden;
+}
+.task-list .task-box {
+  float: left;
+  width: 280px;
+  margin-right: 50px;
+  border: 1px solid #e1e1e1;
+  border-radius: 5px;
+}
+.task-list .task-box li {
+  height: 35px;
+  line-height: 35px;
+  padding-left: 15px;
+  border-bottom: 1px solid #e1e1e1;
+}
+.task-list .task-box li .task-fanish {
+  margin-right: 8px;
+}
+.task-list .task-box li .glyphicon {
+  display: none;
+  float: right;
+  margin-top: 10px;
+  cursor: pointer;
+  font-size: 12px;
+  color: #e1e1e1;
+}
+.task-list .task-box li:hover .glyphicon {
+  display: inline-block;
+}
+.task-list .task-box .task-status,
+.task-list .task-box .task-new {
+  height: 45px;
+  line-height: 45px;
+  font-size: 16px;
+  background: #fafafa;
+}
+.task-list .task-box .task-new {
+  margin-top: 30px;
+  color: #fafafa;
+  cursor: pointer;
+}
+.task-list .task-box .from {
+  display: none;
+  height: auto;
+  padding: 10px;
+}
+.task-list .task-box .from .textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #e1e1e1;
+  border-radius: 5px;
+  box-shadow: 0 0 2px solid #e1e1e1;
+}
+.task-list .task-box .from .cfm,
+.task-list .task-box .from .cle {
+  padding: 8px 25px;
+}
+.task-list .task-box .from .cfm {
+  margin-right: 10px;
+  background: #41c1a2;
+  color: #fff;
+}
+.task-list .task-box .from .cle {
+  background: #fafafa;
+  border: 1px solid #e1e1e1;
 }

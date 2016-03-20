@@ -1,0 +1,10 @@
+{{each shops as shop i}}
+<div class="s-item">
+	<a href="/detail?id={{shop.id}}"><img src="{{shop.poster}}" alt="" class="s-img"/></a>
+	<div class="s-des-box">
+		<p class="s-title">{{shop.title}}</p>
+		<div><i class="fa fa-star color"></i><i class="fa fa-star-half-o color"></i><span class="s-des">月售{{shop.salenum}}份</span></div>
+		<div><span class="s-des">配送费：￥{{shop.distributionfee}}</span><span class="s-des">起送：￥{{shop.startingprice}}</span><span class="s-time">{{shop.distributiontime}}</span></div>
+	</div>
+</div>
+{{/each}}

@@ -22,6 +22,10 @@ app.set('views', __dirname + '/views');
 var mongoose = require("mongoose");
 mongoose.connect('mongodb://localhost/worktile');
 var UserModel = require("./models/user.js");
+var ProjectModel = require("./models/project.js");
+var TeamModel = require("./models/team.js");
+
+
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function callback () {
@@ -37,26 +41,27 @@ app.use(session({
   cookie: {
     maxAge: 1000*60*30
   },
-  resave: false,
+  resave: true,
   saveUninitialized: true,
 }));
 
 app.get('/', function(req, res){
-  console.log(req);
-  console.log(req.session.username);
 
   var username = req.session.username;
   if(!username){
     res.redirect("/login");
   }else{
 
-    res.render("index",username);
+    res.render("index",{
+      username: username
+    });
   }
 
 });
 
 app.get("/login",function(req,res){
   res.render("login");
+  // res.redirect("/register");
 });
 
 app.get("/register",function(req,res){
@@ -81,7 +86,6 @@ app.post("/submitLogin",function(req,res,next){
   var param = req.body;
   var username = param.username;
   var password = param.password;
-  console.log(param);
 
   UserModel.findOne({username: username}, function(err,user){
 
@@ -92,8 +96,6 @@ app.post("/submitLogin",function(req,res,next){
       });
       console.log("find user failed======>",err);
     }
-
-    console.log(user);
 
     if(!user){
       res.status(200).json({
@@ -107,8 +109,11 @@ app.post("/submitLogin",function(req,res,next){
       });
     }else{
       req.session.username = username;
-      // res.status(200).redirect("/");
-      res.redirect("/");
+      res.status(200).json({
+        success: "T",
+        message: "登录成功"
+      });
+      // res.redirect("/");
     }
 
   });
@@ -118,14 +123,11 @@ app.all("/submitRegister",function(req,res,next){
   var param = req.body;
   var username = param.username;
   var password = param.password;
-  console.log(param);
   UserModel.findOne({username: username}, function(err,user){
 
     if(err){
       console.log("find user failed======>",err);
     }
-
-    console.log(user);
 
     if(user){
       res.status(200).json({
@@ -135,22 +137,27 @@ app.all("/submitRegister",function(req,res,next){
     }else{
       var user = new UserModel({
         username: username,
-        password: password
+        password: password,
+        project: [],
+        team: []
       });
 
       user.save(function(err){
-        console.log("user save failed");
-        console.log(err.message);
+        if(err){
+          console.log("user save failed");
+          res.status(500).json({
+            success: "F",
+            errMsg: "数据库错误，请稍后再试"
+          });
+        }else{
+          res.status(200).json({
+            success: "T",
+            message: "注册成功"
+          });
+          res.redirect("/login");
+        }
       });
-
-      res.status(200).json({
-        success: "T",
-        message: "注册成功"
-      });
-
-      res.redirect("/login");
     }
-
   });
 });
 
@@ -158,4 +165,161 @@ app.all("/submitLogout",function(req,res){
   req.session.username = null;
   res.status(200);
   res.redirect("/login");
+});
+
+app.all("/submitNewProject",function(req,res){
+    var param = req.body;
+    console.log(param);
+
+    var project = new ProjectModel({
+      projectname: param.projectname,
+      teamname: param.teamname
+    });
+
+    var username = req.session.username;
+    UserModel.findOne({username: username},function(err,user){
+      user.project.push(param.projectname);
+      var _id = user._id; //需要取出主键_id
+      delete user._id;    //再将其删除
+      UserModel.update({_id:_id},user,function(err){
+        if(err){
+          console.log("UserModel update failed");
+          res.status(500).json({
+            success: "F",
+            message: "数据库错误，请稍后再试"
+          });
+        }
+      });
+      //此时才能用Model操作，否则报错
+    });
+
+    project.save(function(err){
+      if(err){
+        console.log("project save failed");
+        console.log(err);
+        res.status(500).json({
+          success: "F",
+          errMsg: "数据库错误，请稍后再试"
+        });
+      }else{
+        res.status(200).json({
+          success: "T",
+          message: "创建成功"
+        });
+      }
+    });
+    
+});
+
+app.all("/submitNewTeam",function(req,res){
+    var param = req.body;
+    var team = new ProjectModel({
+      teamname: param.teamname,
+      teamdesc: param.teamdesc,
+      teammember: [],
+      teamtask: {}
+    });
+    var username = "math";
+    UserModel.findOne({username: username},function(err,user){
+      user.team.push(param.teamname);
+      var _id = user._id; //需要取出主键_id
+      delete user._id;    //再将其删除
+      UserModel.update({_id:_id},user,function(err){
+        if(err){
+          console.log("UserModel update failed");
+          res.status(500).json({
+            success: "F",
+            message: "数据库错误，请稍后再试"
+          });
+        }
+      });
+        //此时才能用Model操作，否则报错
+      });
+    // UserModel.update({username: username},{$set:{teamname:teamname.push(param.teamname)}},function(err){
+    //   if(err){
+    //     console.log("UserModel update failed");
+    //     res.status(500).json({
+    //       success: "F",
+    //       message: "数据库错误，请稍后再试"
+    //     });
+    //   }
+    // });
+    // UserModel.findOne({username: username},function(err,user){
+    //   if(err){
+    //     console.log("query UserModel failed");
+    //     console.log(err);
+    //     return false
+    //   }
+
+    //   user.teamname.push(param.teamname);
+    // });
+
+    team.save(function(err){
+      if(err){
+        console.log("team save failed");
+        res.status(500).json({
+          success: "F",
+          errMsg: "数据库错误，请稍后再试"
+        });
+        res.end();
+      }else{
+        res.status(200).json({
+          success: "T",
+          message: "创建成功"
+        });
+      }
+    });
+});
+
+
+app.all("/submitQuitTeam",function(req,res){
+
+  var username = req.session.username;
+  var teamname = req.body.teamname;
+  UserModel.findOne({username: username},function(err, user){
+    if(err){
+      req.status(500).json({
+        success: "F",
+        errMsg: "数据库错误，请稍后再试"
+      });
+    }else{
+      var uIndex = user.team.indexOf(teamname);
+      user.team.splice(uIndex,1);
+      var _uid = user.id;
+      UserModel.update({id: _uid},user,function(err){
+        if(err){
+          req.status(500).json({
+            success: "F",
+            errMsg: "数据库错误，请稍后再试"
+          });
+        }
+      });
+    }
+
+    TeamModel.findOne({teamname: teamname},function(err, team){
+      if(err){
+        req.status(500).json({
+          success: "F",
+          errMsg: "数据库错误，请稍后再试"
+        });
+      }else{
+        var tIndex = team.member.indexOf(username);
+        team.member.splice(tIndex,1);
+        var _tid = team.id;
+        TeamModel.update({id: _tid},team,function(err){
+          req.status(500).json({
+            success: "F",
+            errMsg: "数据库错误，请稍后再试"
+          });
+        });
+
+        res.status(200).json({
+          success:"T",
+          message: "您已退出" + teamname
+        });
+      }
+    });
+
+
+  });
 });

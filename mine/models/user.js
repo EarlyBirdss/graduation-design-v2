@@ -5,11 +5,9 @@ var mongoose = require("mongoose"),
 
 var UserSchema = new Schema({
     username: String,
-    password: String
+    password: String,
+    project: Array,
+    team: Array
 });
- 
-UserSchema.statics.findByName = function(name,cb){
-	this.find({name:new RegExp(name,'i'),cb});
-}
 
 module.exports = mongoose.model("user", UserSchema);

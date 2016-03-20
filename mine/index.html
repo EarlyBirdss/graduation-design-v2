@@ -15,11 +15,11 @@
 				<a href="index.html" class="logo"></a>
 			</div>
 			<div class="col-md-6">
-				<div class="form-inline">
+				<!-- <div class="form-inline">
 					<span class="glyphicon glyphicon-search search-icon"></span>
 					<input type="text" class="search-input form-control" placeholder="搜索···">
 					<button class="btn btn-default search-btn">搜索</button>
-				</div>	
+				</div>	 -->
 			</div>
 			<div class="col-md-4">
 				<div class="col-md-4">
@@ -39,14 +39,16 @@
 						<h3 class="np-tt">新建</h3>
 						<ul class="form">
 							<li>
-								<label for="projectName">项目名称</label>
-								<input class="new-input" type="text" placeholder="项目名称" id="projectName">
+								<label for="projectname">项目名称</label>
+								<input class="new-input" type="text" placeholder="项目名称" id="projectname" name="projectname">
 							</li>
 							<li>
-								<label for="projectOwer">项目所属团队</label>
-								<select class="new-select" name="projectOwer" id="projectOwer">
+								<label for="projectower">项目所属团队</label>
+								<!-- <select class="new-select" name="projectower" id="projectower">
 									<option value=""></option>
-								</select>
+								</select> -->
+								<!-- <button class="btn J_new_project">新建团队</button> -->
+								<p>您还没有加入团队，请先创建团队</p>
 							</li>
 							<li>
 								<button class="btn sub J_btn_new_project">创建</button>
@@ -58,12 +60,12 @@
 						<h3 class="np-tt">新建</h3>
 						<ul class="form">
 							<li>
-								<label for="projectName">团队名称</label>
-								<input class="new-input" type="text" placeholder="团队名称" id="projectName">
+								<label for="teamname">团队名称</label>
+								<input class="new-input" type="text" placeholder="团队名称" id="teamname" name="teamname">
 							</li>
 							<li>
-								<label for="projectOwer">团队描述</label>
-								<textarea class="new-textarea" name="" id="" cols="30" rows="10" placeholder="为团队添加简短描述（可选）"></textarea>
+								<label for="teamdesc">团队描述</label>
+								<textarea class="new-textarea" name="teamdesc" id="teamdesc" cols="30" rows="5" placeholder="为团队添加简短描述（可选）"></textarea>
 							</li>
 							<li>
 								<button class="btn sub J_btn_new_team">创建</button>
@@ -77,7 +79,7 @@
 					<a href="javascript:;" class="h-msg J_msg" data-type="messageCenter"><span class="glyphicon glyphicon-bell"></span>消息</a>
 				</div>
 				<div class="col-md-4">
-					<a href="javascript:;" class="h-user J_user"><span class="glyphicon glyphicon-user"></span>用户
+					<a href="javascript:;" class="h-user J_user"><span class="glyphicon glyphicon-user"></span>{{username}}
 					<div class="user-pop J_user_pop">
 						<h3 class="np-tt">账&emsp;&emsp;户<span class="glyphicon glyphicon-remove np-close"></h3>
 						<ul>
@@ -116,7 +118,7 @@
 			<ul>
 				<li class="event-itm">
 					<div class="col-md-2">
-						<a href=""><img class="img-circle user-img" src="1.png" width="30" height="30"><span class="user-name">Jame</span></a>
+						<a href=""><i class="img-circle user-img" src="1.png"></i><span class="user-name">Jame</span></a>
 					</div>
 					<div class="col-md-8">
 						<p class="brief">评论了文件：海外接送机_PRD_V0.3- 前台部分.docx</p>
@@ -166,7 +168,7 @@
 		<div class="col-md-4 ws-aside">
 			<div class="ws-ad-box">
 				<div class="ws-tt">
-					<img src="1.png" alt="" class="img-circle user-img">Mathilda
+					<i class="img-circle user-img"></i>Mathilda
 				</div>
 				<div class="row">
 					<div class="col-md-4 aside-itm">
@@ -198,11 +200,64 @@
 		</div>
 	</div>
 </section>
+<section class="fixed task-detail" id="J_task_detail">
+	<!-- 任务详情 -->
+	<header class="tt">
+		项目名称
+		<div class="tt-right">
+			<span class="tt-item"><span class="glyphicon glyphicon-time"></span>日期</span>
+			<span class="tt-item"><span class="glyphicon glyphicon-list"></span>检查项</span>
+			<span class="tt-item"><span class="glyphicon glyphicon-file-open"></span>删除</span>
+			<span class="tt-item J_close_pop"><span class="glyphicon glyphicon-remove"></span></span>
+		</div>
+	</header>
+	<div class="task-info">
+		<h2 class="ti-tt">项目名称</h2>
+		<p class="tt-sub"></p>
+		<textarea class="tt-textarea" placeholder="添加任务描述"></textarea>
+		<div class="btngroup">
+			<a href="javascript:;" class="btn btn-save">保存</a>
+			<a href="javascript:;" class="btn btn-cle">取消</a>
+		</div>
+		<ul class="tab-head clearfix">
+			<li class="tab-head-item cur">评论</li>
+			<li class="tab-head-item">活动</li>
+		</ul>
+		<ul class="tab-body">
+			<li class="tab-body-list">
+				<div class="user-img">M</div>
+				<p>Mathilda <span class="tab-update-time">2015-12-10</span></p>
+				<p class="content-detail">
+					完成了任务！
+				</p>
+			</li>
+		</ul>
+		<div class="new-comment">
+			<textarea name="" id="" cols="30" rows="10" class="nc-textarea"></textarea>
+			<div class="tool-bar">
+				<a href="javascript:;" class="nc-btn">发表评论</a>
+			</div>
+		</div>
+	</div>
+	<div class="task-aside">
+		<div class="ta-item">
+			<h3 class="ti-tt">分配</h3>
+			<i class="user-img">M</i>
+			<i class="circle-border"><span class="glyphicon glyphicon-plus"></span></i>
+		</div>
+		<div class="ta-item">
+			<h3 class="ti-tt">关注</h3>
+			<i class="user-img">M</i>
+			<i class="circle-border"><span class="glyphicon glyphicon-plus"></span></i>
+		</div>
+	</div>
+</section>
 </article>
 <script src="plugin/jquery/jquery.js"></script>
-<script src="plugin/seajs/sea.js" data-config="./src/scripts/config" data-main="./src/scripts/main"></script>
+<script src="plugin/seajs/sea.js"></script>
+<script src="plugin/layer/layer.js"></script>
 <script src="src/scripts/util.js"></script>
-<script src="src/scripts/index.js"></script>
+<!-- <script src="src/scripts/index.js"></script> -->
 <script>
 // seajs 的简单配置
 seajs.config({
@@ -213,7 +268,7 @@ seajs.config({
 });
 
 // 加载入口模块
-seajs.use("/")
+seajs.use("/src/scripts/index");
 </script>
 </body>
 </html>
