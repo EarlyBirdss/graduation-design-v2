@@ -134,3 +134,85 @@
     timer undefined
     timer undefined
     timer undefined
+
+
+### 嗯？大写的懵逼！
+
+前脚刚刚记下这个问题，感觉要晕好多天，刚刚试了一下好像就可以了？！callback 在写js的时候我也用过很多次啊，但是我这里一直以为getXXData里面我拿不到res啊啊啊啊啊！一直在纠结啊啊啊啊啊啊！形参跟实参我还是懵逼的啊啊啊啊啊！
+
+然后解决的代码是这样的
+
+      //switch分支
+      app.get("/getSection", function(req, res, next) {
+      
+        //之前的代码
+         ...
+      
+          var callback = function(data){
+              console.log(data);
+              var html = template(uri, {
+                  data: data
+              });
+              res.send(html);
+              next();
+          }
+      
+          switch (req.query.type) {
+              case "discover":
+                  data = getDiscoverData(param,callback);  //加一个callback
+                  break;
+              //之前的代码
+              ...
+          }
+          
+      });
+      //getXXData()
+      function getDiscoverData(param,callback) {
+          var username = param.username;
+          var data = [];
+          var task = [];
+      
+          UserModel.findOne({
+              username: username
+          }, function(err, user) {
+      
+              var team = user.team;
+              for (var i = 0, len = team.length; i < len; i++) {
+      
+                  TeamModel.findOne({
+                      _id: team[i]
+                  }, function(err, team) {
+                      var thisproject = team.project;
+      
+                      if (!thisproject.length) {
+                          console.log("1",data);
+                          return data;
+                      }
+      
+                      for (var n = 0, len = thisproject.length; i < len; i++) {
+                          var thistask = team.project.task;
+      
+                          if (!thistask.length) {
+                              console.log("2",data);
+                              return data;
+                          }
+      
+                          for (var j = 0, len = thistask.length; i < len; i++) {
+                              thistask.projectname = projects[i];
+                          }
+                          task = task.concat(thistask);
+                      }
+      
+                  });
+              }
+      
+              if(typeOf(callback) === "function"){ //执行callback
+                  callback.call(null,data);
+              }
+      
+          });
+      
+          return data;
+      }      
+  
+  这样的模式我在写js的时候用的也挺多
