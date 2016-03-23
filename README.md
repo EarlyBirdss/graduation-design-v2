@@ -6,7 +6,7 @@
   
   贴下代码段
   
-  //switch 分支
+    //switch 分支
      app.get("/getSection", function(req, res, next) {
       var uri = 'template/' + req.query.type;
       var param = req.query;
@@ -116,16 +116,18 @@
     }
 
 //贴下getDiscoverData其中一个数据例子(team=[数据一]，project=[],task=[])的打印结果
+
         3[]
         1[]
         1[]
+        
 //没太懂1打印了两次，3打印一次，2一次都没有打印
 
 然后我还在switch接受端，写了个定时器，检测data的值是否为undefined，因为就没有懂过异步到底是啥，到底啥影响，到底怎么用等等等等，就这样
+
      var timer = setInterval(function(){
         console.log("timer",data);
         if(data){
-
             var html = template(uri, {
                 data: data
             });
