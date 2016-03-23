@@ -175,44 +175,14 @@
           UserModel.findOne({
               username: username
           }, function(err, user) {
+            //之前的代码
+             ...
       
-              var team = user.team;
-              for (var i = 0, len = team.length; i < len; i++) {
-      
-                  TeamModel.findOne({
-                      _id: team[i]
-                  }, function(err, team) {
-                      var thisproject = team.project;
-      
-                      if (!thisproject.length) {
-                          console.log("1",data);
-                          return data;
-                      }
-      
-                      for (var n = 0, len = thisproject.length; i < len; i++) {
-                          var thistask = team.project.task;
-      
-                          if (!thistask.length) {
-                              console.log("2",data);
-                              return data;
-                          }
-      
-                          for (var j = 0, len = thistask.length; i < len; i++) {
-                              thistask.projectname = projects[i];
-                          }
-                          task = task.concat(thistask);
-                      }
-      
-                  });
-              }
-      
-              if(typeOf(callback) === "function"){ //执行callback
-                  callback.call(null,data);
-              }
+              //执行callback
+              callback.call(null,data);
       
           });
       
-          return data;
       }      
   
   这样的模式我在写js的时候用的也挺多
