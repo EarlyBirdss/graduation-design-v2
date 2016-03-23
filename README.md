@@ -49,22 +49,6 @@
       });
       res.send(html);
       next();
-  
-  
-      var timer = setInterval(function(){
-          console.log("timer",data);
-          if(data){
-  
-              var html = template(uri, {
-                  data: data
-              });
-              res.send(html);
-              next();
-  
-              clearInterval(timer);
-          }
-  
-      },1000);
       
     });
     
