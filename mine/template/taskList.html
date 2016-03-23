@@ -3,12 +3,14 @@
 	<header class="tt">
 		项目名称
 	</header>
-	<ul class="task-status-list">
+	<ul class="task-status-list J_project_title" data-projectId="{{projectId}}" data-teamId="{{teamId}}" data-projectname="{{projectname}}" data-teamname="teamname">
 		<li class="task-box">
 			<ul>
 				<li class="task-status">要做</li>
-				<li><input type="checkbox" class="task-fanish J_task_fanish_btn"><span class="J_task_title">task title </span><span class="glyphicon glyphicon-remove"></span></li>
-				<li class="from">
+				{{each todo}}
+				<li><input type="checkbox" class="task-fanish J_task_fanish_btn"><span class="J_task_title" data-taskId="{{$value.taskId}}">{{$value.taskname}} </span><span class="glyphicon glyphicon-remove"></span></li>
+				{{/each}}
+				<li class="form">
 					<textarea class="textarea" name="task" id="task" cols="10" rows="3"></textarea>
 					<button class="btn cfm J_new_task_cfm">创建</button>
 					<button class="btn cle J_new_task_cle">取消</button>
@@ -18,15 +20,30 @@
 		</li>
 		<li class="task-box">
 			<ul>
-				<li class="task-status">要做</li>
-				<li class="task-new">新建任务</li>
+				<li class="task-status">正在做</li>
+				{{each doing}}
+				<li><input type="checkbox" class="task-fanish J_task_fanish_btn"><span class="J_task_title" data-taskId="{{$value.taskId}}">{{$value.taskname}} </span><span class="glyphicon glyphicon-remove"></span></li>
+				{{/each}}
+				<li class="form">
+					<textarea class="textarea" name="task" id="task" cols="10" rows="3"></textarea>
+					<button class="btn cfm J_new_task_cfm">创建</button>
+					<button class="btn cle J_new_task_cle">取消</button>
+				</li>
+				<li class="task-new J_new_task_btn">新建任务</li>
 			</ul>
 		</li>
 		<li class="task-box">
 			<ul>
-				<li class="task-status">要做</li>
-				<li>task title</li>
-				<li class="task-new">新建任务</li>
+				<li class="task-status">已完成</li>
+				{{each done}}
+				<li><input type="checkbox" class="task-fanish J_task_fanish_btn"><span class="J_task_title" data-taskId="{{$value.taskId}}">{{$value.taskname}} </span><span class="glyphicon glyphicon-remove"></span></li>
+				{{/each}}
+				<li class="form">
+					<textarea class="textarea" name="task" id="task" cols="10" rows="3"></textarea>
+					<button class="btn cfm J_new_task_cfm">创建</button>
+					<button class="btn cle J_new_task_cle">取消</button>
+				</li>
+				<li class="task-new J_new_task_btn">新建任务</li>
 			</ul>
 		</li>
 	</ul>

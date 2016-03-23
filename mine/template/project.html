@@ -4,13 +4,17 @@
 	</header>
 	<div class="p-body">
 		<ul class="p-list">
-			<li class="p-item J_project_item" data-type="taskList">
-				<h2 class="pi-tt">项目名称</h2>
-				<div class="pi-body">
-					<i class="icon-pro glyphicon glyphicon-inbox"></i>
-					<p>项目名称</p>
-				</div>
+		{{each teams}}
+			<li class="p-item">
+				<h2 class="pi-tt">{{$value.teamname}}</h2>
+				{{each $value.project}}
+					<div class="pi-body J_project_item" data-type="taskList" data-teamId="{{$value.teamId}}" data-projectId="{{$value.projectId}}">
+						<i class="icon-pro glyphicon glyphicon-inbox"></i>
+						<p>{{$value.projectname}}</p>
+					</div>
+				{{/each}}
 			</li>
+		{{/each}}
 		</ul>
 	</div>
 </section>

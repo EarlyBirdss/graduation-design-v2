@@ -9,17 +9,19 @@
 				<tr>
 					<th>团队名</th>
 					<th>所有者</th>
-					<th>权限</th>
+					<!-- <th>权限</th> -->
 					<th>管理</th>
 				</tr>
 			</thead>
 			<tbody>
+			{{each team}}
 				<tr>
-					<td>接送产品团队</td>
-					<td>James</td>
-					<td>成员</td>
+					<td>{{$value.teamname}}</td>
+					<td>{{$value.teamower}}</td>
+					<!-- <td>成员</td> -->
 					<td><a class="btn team-exit-btn">退出</a></td>
 				</tr>
+			{{/each}}
 			</tbody>
 		</table>
 	</div>

@@ -4,32 +4,34 @@
 		<div class="col-md-9">
 			<span class="glyphicon glyphicon-eye-open"></span>发现
 		</div>
-		<div class="col-md-3">
+		<!-- <div class="col-md-3">
 			<a class="tt-itm tt-cur">任务</a>
 			<a class="tt-itm">话题</a>
-		</div>
+		</div> -->
 	</header>
 	<div class="d-itm">
 		<header class="tt">
 			<span class="dit-tt">任务</span>
-			<ul class="dit-tab J_dit_tab_head">
+			<!-- <ul class="dit-tab J_dit_tab_head">
 				<li class="ditt-itm cur">全部</li>
 				<li class="ditt-itm">分配给我的</li>
 				<li class="ditt-itm">我创建的</li>
 				<li class="ditt-itm">我关注的</li>
-			</ul>
+			</ul> -->
 		</header>
 		<div class="J_dit_tab_body">
 			<div class="ws-2-tab cur">
 				<ul class="ws-2-list">
+				{{each data}}
 					<li class="ws-2-item">
-						<p class="finish-time">2012年12月01</p>
-						<p class="task-name">任务标题</p>
-						<p class="prom-name"><span class="glyphicon glyphicon-tasks"></span>所属项目</p>
+						<p class="finish-time">{{$value.date}}</p>
+						<p class="task-name">{{$value.taskname}}任务标题</p>
+						<p class="prom-name"><span class="glyphicon glyphicon-tasks"></span>{{$value.projectname}}</p>
 					</li>
+				{{/each}}
 				</ul>
 			</div>
-			<div class="ws-2-tab">
+			<!-- <div class="ws-2-tab">
 				<ul class="ws-2-list">
 					<li class="ws-2-item">
 						<p class="finish-time">2012年12月01</p>
@@ -55,7 +57,7 @@
 						<p class="prom-name"><span class="glyphicon glyphicon-tasks"></span>所属项目</p>
 					</li>
 				</ul>
-			</div>
+			</div> -->
 		</div>
 	</div>
 </section>

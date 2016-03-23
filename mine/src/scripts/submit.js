@@ -3,7 +3,7 @@ define(function  (require, exports, module) {
 	"use strict";
 
 	var submit = {
-		newProject: function($this){
+		newProject: function($this,callback){
 			//新建项目
 			var data = {
 				projectname: $("#projectname").val(),
@@ -22,6 +22,10 @@ define(function  (require, exports, module) {
 				success: function(data) {
 					if(data.success === "F"){
 						layer.alert(data.errMsg);
+					}else{
+						if(typeof callback === "function"){
+							callback.call(null,data.data);
+						}
 					}
 				},
 				error: function(data){
@@ -29,7 +33,7 @@ define(function  (require, exports, module) {
 				}
 			});
 		},
-		newTeam: function($this){
+		newTeam: function($this,callback){
 			//新建团队
 
 			var data = {
@@ -49,6 +53,10 @@ define(function  (require, exports, module) {
 				success: function(data) {
 					if(data.success === "F"){
 						layer.alert(data.errMsg);
+					}else{
+						if(typeof callback === "function"){
+							callback.call(null,data.data);
+						}
 					}
 				},
 				error: function(data){
@@ -94,10 +102,13 @@ define(function  (require, exports, module) {
 			});
 		},
 		newTask: function($this,callback) {
-
+			var projectTitle = $this.parents(".J_project_title");
 			var data = {
+				teamname: projectTitle.data("teamname"),
+				projectname: projectTitle.data("projectname"),
 				taskname: $("#task").val()
 			};
+			console.log(data);
 
 			$.ajax({
 				type: "post",
@@ -109,7 +120,7 @@ define(function  (require, exports, module) {
 						window.alert(data.errMsg);
 					}else{
 						if(typeof callback === "function") {
-							callback.call(null);
+							callback.call(null,data.data);
 						}
 					}
 
@@ -120,13 +131,18 @@ define(function  (require, exports, module) {
 			});
 		},
 		finishTask: function($this, callback) {
+
+			var projectTitle = $this.parents(".J_project_title");
+
 			var data = {
-				taskname: $this.next(".J_task_title").html();
+				teamname: projectTitle.data("teamname"),
+				projectname: projectTitle.data("projectname"),
+				taskname: $this.next(".J_task_title").html()
 			};
 
 			$.ajax({
 				type: "post",
-				url: "/submitNewTask",
+				url: "/submitFinishTask",
 				data: data,
 				success: function(data) {
 					if(data.success === "F"){
@@ -134,7 +150,7 @@ define(function  (require, exports, module) {
 						window.alert(data.errMsg);
 					}else{
 						if(typeof callback === "function") {
-							callback.call(null);
+							callback.call(null,data.data);
 						}
 					}
 

@@ -176,15 +176,18 @@ body {
 .section .tt .tt-cur {
   border-bottom: 5px solid #992200;
 }
+.team .ws-warp,
 .work-space .ws-warp {
   padding: 15px;
 }
+.team .ws-main,
 .work-space .ws-main {
   display: none;
   border: 1px solid #e1e1e1;
   box-shadow: 0 1px 1px #c1c1c1;
   padding: 15px;
 }
+.team .ws-main .ws-tt,
 .work-space .ws-main .ws-tt {
   height: 45px;
   padding: 0 15px;
@@ -192,13 +195,16 @@ body {
   font-size: 16px;
   border-bottom: 1px solid #e1e1e1;
 }
+.team .ws-main.cur,
 .work-space .ws-main.cur {
   display: block;
 }
+.team .tab1 .refrench,
 .work-space .tab1 .refrench {
   float: right;
   font-size: 14px;
 }
+.team .tab1 .event-itm,
 .work-space .tab1 .event-itm {
   min-height: 45px;
   padding: 15px;
@@ -206,46 +212,57 @@ body {
   border-bottom: 1px solid #e1e1e1;
   cursor: pointer;
 }
+.team .tab1 .event-itm .brief,
 .work-space .tab1 .event-itm .brief {
   font-size: 16px;
   color: #252525;
 }
+.team .tab1 .event-itm .date,
 .work-space .tab1 .event-itm .date {
   text-align: right;
   line-height: 25px;
 }
+.team .tab1 .btn-more,
 .work-space .tab1 .btn-more {
   display: inline-block;
   margin: 20px auto;
   padding: 10px 60px;
   border: 1px solid #e1e1e1;
 }
+.team .tab2 .tab-tt,
 .work-space .tab2 .tab-tt {
   float: left;
   font-size: 22px;
 }
+.team .tab2 .ws-2-tab-head,
 .work-space .tab2 .ws-2-tab-head {
   float: left;
   cursor: pointer;
 }
+.team .tab2 .ws-2-tab-head .cur,
 .work-space .tab2 .ws-2-tab-head .cur {
   border-bottom: 2px solid #992200;
 }
+.team .tab2 .ws-2-tab-head .ws-2-tab,
 .work-space .tab2 .ws-2-tab-head .ws-2-tab {
   float: left;
   margin-left: 40px;
   font-size: 18px;
 }
+.team .tab2 .ws-2-tab-body .ws-2-item,
 .work-space .tab2 .ws-2-tab-body .ws-2-item {
   border-bottom: 1px solid #e1e1e1;
 }
+.team .tab2 .ws-2-tab-body .ws-2-tab,
 .work-space .tab2 .ws-2-tab-body .ws-2-tab {
   display: none;
 }
+.team .tab2 .ws-2-tab-body .ws-2-tab .ws-2-item,
 .work-space .tab2 .ws-2-tab-body .ws-2-tab .ws-2-item {
   padding: 10px 15px;
   cursor: pointer;
 }
+.team .tab2 .ws-2-tab-body .ws-2-tab .finish-time,
 .work-space .tab2 .ws-2-tab-body .ws-2-tab .finish-time {
   padding: 8px 15px;
   color: #992200;
@@ -253,61 +270,115 @@ body {
   border-bottom: 1px solid #992200;
   background: #fdfcde;
 }
+.team .tab2 .ws-2-tab-body .ws-2-tab .task-name,
 .work-space .tab2 .ws-2-tab-body .ws-2-tab .task-name {
   padding: 8px 0;
   font-size: 16px;
   color: #252525;
 }
+.team .tab2 .ws-2-tab-body .ws-2-tab .tip-box,
 .work-space .tab2 .ws-2-tab-body .ws-2-tab .tip-box {
   min-height: 320px;
   text-align: center;
   color: #e1e1e1;
   font-size: 32px;
 }
+.team .tab2 .ws-2-tab-body .ws-2-tab .tip-box .glyphicon,
 .work-space .tab2 .ws-2-tab-body .ws-2-tab .tip-box .glyphicon {
   font-size: 52px;
   padding: 20px;
 }
+.team .tab2 .ws-2-tab-body .cur,
 .work-space .tab2 .ws-2-tab-body .cur {
   display: block;
 }
+.team .ws-aside .ws-ad-box,
 .work-space .ws-aside .ws-ad-box {
   border: 1px solid #e1e1e1;
   box-shadow: 0 1px 1px #c1c1c1;
   margin-bottom: 20px;
   padding: 15px;
 }
+.team .ws-aside .ws-tt,
 .work-space .ws-aside .ws-tt {
   height: 45px;
   padding: 0 15px;
   line-height: 45px;
   border-bottom: 1px solid #e1e1e1;
 }
+.team .ws-aside .num,
 .work-space .ws-aside .num {
   font-weight: bold;
   color: #992200;
 }
+.team .ws-aside .aside-itm,
 .work-space .ws-aside .aside-itm {
   margin: 10px 0;
   text-align: center;
   border-right: 1px solid #e1e1e1;
   cursor: pointer;
 }
+.team .ws-aside .last,
 .work-space .ws-aside .last {
   border: none;
 }
+.team .ws-aside .ws-plan-tt,
 .work-space .ws-aside .ws-plan-tt {
   font-size: 18px;
   color: #252525;
 }
+.team .ws-aside .tip-box,
 .work-space .ws-aside .tip-box {
   min-height: 120px;
   text-align: center;
   color: #e1e1e1;
 }
+.team .ws-aside .tip-box .glyphicon,
 .work-space .ws-aside .tip-box .glyphicon {
   font-size: 42px;
   padding: 20px;
+}
+.team .teamer-item {
+  float: left;
+  margin-right: 40px;
+  margin-top: 30px;
+}
+.team .teamer-item .user-img {
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+}
+.team .add-teamer > .glyphicon {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  border: 1px solid #e1e1e1;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+}
+.team .p-item {
+  margin-top: 30px;
+  cursor: pointer;
+}
+.team .p-item .pi-tt {
+  font-size: 20px;
+  line-height: 46px;
+}
+.team .p-item .pi-body {
+  width: 180px;
+  height: 120px;
+  border: 1px solid #e1e1e1;
+  box-shadow: 0 0 3px #e1e1e1;
+  text-align: center;
+  font-size: 20px;
+}
+.team .p-item .icon-pro {
+  font-size: 34px;
+  padding: 30px 0 10px 0;
+  color: #992200;
 }
 .team-management .tt .new-team-btn {
   float: right;
@@ -443,6 +514,7 @@ body {
 }
 .project .p-body .p-item {
   margin-bottom: 30px;
+  cursor: pointer;
 }
 .project .p-body .p-item .pi-tt {
   font-size: 20px;
@@ -788,31 +860,30 @@ body {
 }
 .task-list .task-box .task-new {
   margin-top: 30px;
-  color: #fafafa;
   cursor: pointer;
 }
-.task-list .task-box .from {
+.task-list .task-box .form {
   display: none;
   height: auto;
   padding: 10px;
 }
-.task-list .task-box .from .textarea {
+.task-list .task-box .form .textarea {
   width: 100%;
   padding: 8px;
   border: 1px solid #e1e1e1;
   border-radius: 5px;
   box-shadow: 0 0 2px solid #e1e1e1;
 }
-.task-list .task-box .from .cfm,
-.task-list .task-box .from .cle {
+.task-list .task-box .form .cfm,
+.task-list .task-box .form .cle {
   padding: 8px 25px;
 }
-.task-list .task-box .from .cfm {
+.task-list .task-box .form .cfm {
   margin-right: 10px;
   background: #41c1a2;
   color: #fff;
 }
-.task-list .task-box .from .cle {
+.task-list .task-box .form .cle {
   background: #fafafa;
   border: 1px solid #e1e1e1;
 }

@@ -1,0 +1,130 @@
+<section class="section team" id="team">
+	<!-- 团队 -->
+	<header class="tt">
+		<div class="col-md-9">
+			<span class="glyphicon glyphicon-briefcase"></span>{{teamname}}
+		</div>
+		<div class="col-md-3 J_team_tab_head">
+			<a class="tt-itm tt-cur">成员</a>
+			<a class="tt-itm">项目</a>
+		</div>
+	</header>
+	<div class="ws-warp J_team_tab_body">
+		<div class="col-md-8 ws-main tab1 cur">
+			<div class="ws-tt">成员</div>
+			<ul class="p-list clearfix">
+				<li class="teamer-item add-teamer">
+					<span class="glyphicon glyphicon-plus"></span>添加成员
+				</li>
+				<li class="teamer-item">
+					{{each teamers}}
+					<i class="user-img circle-img">{{$value.userheader}}</i>{{$value.username}}
+					{{/each}}
+				</li>
+			</ul>
+		</div>
+
+		<div class="col-md-8 ws-main tab1 ">
+			<!-- <div class="ws-tt">{{teamname}}</div> -->
+			<ul class="p-list clearfix">
+			{{each projects}}
+				<li class="p-item J_project_item" data-type="taskList" data-projectId="{{$value.projectId}}" data-teamId="{{teamId}}">
+					<div class="pi-body">
+						<i class="icon-pro glyphicon glyphicon-inbox"></i>
+						<p>{{$value.projectname}}</p>
+					</div>
+				</li>
+			{{/each}}
+			</ul>
+		</div>
+		<!-- <div class="col-md-8 ws-main tab2">
+			<div class="ws-tt"><span class="tab-tt">我的任务</span>
+				<ul class="ws-2-tab-head J_tab2_head">
+					<li class="ws-2-tab cur">待完成</li>
+					<li class="ws-2-tab">正在做</li>
+					<li class="ws-2-tab">已完成</li>
+				</ul>
+			</div>
+			<div class="ws-2-tab-body J_tab2_body">
+				<div class="ws-2-tab">
+					<ul class="ws-2-list">
+					{{each todo}}
+						<li class="ws-2-item">
+							<p class="task-name">{{$value.taskname}}</p>
+							<p class="prom-name"><span class="glyphicon glyphicon-tasks"></span>{{$value.projectname}}</p>
+						</li>
+					{{/each}}
+					</ul>
+				</div>
+				<div class="ws-2-tab">
+					<ul class="ws-2-list">
+					{{each doing}}
+						<li class="ws-2-item">
+							<p class="task-name">{{$value.taskname}}</p>
+							<p class="prom-name"><span class="glyphicon glyphicon-tasks"></span>{{$value.projectname}}</p>
+						</li>
+					{{/each}}
+					</ul>
+				</div>
+				<div class="ws-2-tab">
+					<ul class="ws-2-list">
+					{{each doidoneng}}
+						<li class="ws-2-item">
+							<p class="task-name">{{$value.taskname}}</p>
+							<p class="prom-name"><span class="glyphicon glyphicon-tasks"></span>{{$value.projectname}}</p>
+						</li>
+					{{/each}}
+					</ul>
+				</div>
+				<div class="ws-2-tab">
+					<div class="tip-box">
+						<span class="glyphicon glyphicon-check"></span>
+						<p class="tip">没有已过期的任务</p>
+					</div>
+				</div>
+				<div class="ws-2-tab cur">
+					<ul class="ws-2-list">
+						<li class="ws-2-item">
+							<p class="finish-time">2012年12月01</p>
+							<p class="task-name">任务标题</p>
+							<p class="prom-name"><span class="glyphicon glyphicon-tasks"></span>所属项目</p>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4 ws-aside">
+			<div class="ws-ad-box">
+				<div class="ws-tt">
+					<i class="img-circle user-img"></i>Mathilda
+				</div>
+				<div class="row">
+					<div class="col-md-4 aside-itm">
+						<p class="num">{{todo.length}}</p>
+						<p>待完成任务</p>
+					</div>
+					<div class="col-md-4 aside-itm">
+						<p class="num">{{doing.length}}</p>
+						<p>正在做任务</p>
+					</div>
+					<div class="col-md-4 aside-itm last">
+						<p class="num">{{done.length}}</p>
+						<p>已完成任务</p>
+					</div>
+				</div>	
+			</div> -->
+
+			<!-- <div class="ws-ad-box">
+				<div class="ws-tt ws-plan-tt">
+					今日日程
+				</div>
+				<div class="ws-plan">
+					<div class="tip-box">
+						<span class="glyphicon glyphicon-bookmark"></span>
+						<p class="tip">今天没有日程安排</p>
+					</div>
+				</div>
+			</div>
+		</div> -->
+	</div>
+</section>

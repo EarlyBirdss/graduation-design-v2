@@ -29,6 +29,8 @@ define(function  (require, exports, module) {
 				success: function(data){
 					if(data.success === "F"){
 						window.alert(data.errMsg);
+					}else{
+						window.location.href = "/home";
 					}
 				},
 				error: function(data){

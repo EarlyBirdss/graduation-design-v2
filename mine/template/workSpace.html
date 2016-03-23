@@ -11,41 +11,66 @@
 	</header>
 	<div class="ws-warp J_w_tab_body">
 		<div class="col-md-8 ws-main tab1 cur">
-			<div class="ws-tt">最新动态<a href="javascript:;" class="refrench">刷新</a></div>
+			<div class="ws-tt">最新动态<!-- <a href="javascript:;" class="refrench">刷新</a> --></div>
 			<ul>
-				<li class="event-itm">
+			{{each affairs}}
+				<li class="event-itm" data-teamId="{{$value.teamId}}" data-projectId="{{$value.projectId}}" data-taskId="{{$value.taskId}}">
 					<div class="col-md-2">
-						<a href=""><img class="img-circle user-img" src="1.png" width="30" height="30"><span class="user-name">Jame</span></a>
+						<a href=""><i class="img-circle user-img">{{$value.userhead}}</i><span class="user-name">{{$value.user}}</span></a>
 					</div>
 					<div class="col-md-8">
-						<p class="brief">评论了文件：海外接送机_PRD_V0.3- 前台部分.docx</p>
+						<p class="brief">{{$value.content}}</p>
 					</div>
 					<div class="col-md-2 date">
-						<p>2015-12-9</p>
-						<p>12:08</p>
+						<p>{{$value.date}}</p>
+						<!-- <p>12:08</p> -->
 					</div>
 				</li>
+			{{/each}}
 			</ul>
-			<a href="javascript:;" class="btn btn-more">加载更多</a>
+			<!-- <a href="javascript:;" class="btn btn-more">加载更多</a> -->
 		</div>
 		<div class="col-md-8 ws-main tab2">
 			<div class="ws-tt"><span class="tab-tt">我的任务</span>
 				<ul class="ws-2-tab-head J_tab2_head">
 					<li class="ws-2-tab cur">待完成</li>
-					<li class="ws-2-tab">已过期</li>
+					<li class="ws-2-tab">正在做</li>
 					<li class="ws-2-tab">已完成</li>
 				</ul>
 			</div>
 			<div class="ws-2-tab-body J_tab2_body">
 				<div class="ws-2-tab">
 					<ul class="ws-2-list">
-						<li class="ws-2-item">
-							<p class="task-name">任务标题</p>
-							<p class="prom-name"><span class="glyphicon glyphicon-tasks"></span>所属项目</p>
+					{{each todo}}
+						<li class="ws-2-item" data-teamId="{{$value.teamId}}" data-projectId="{{$value.projectId}}" data-taskId="{{$value.taskId}}">
+							<p class="task-name">{{$value.taskname}}</p>
+							<p class="prom-name"><span class="glyphicon glyphicon-tasks"></span>{{$value.projectname}}</p>
 						</li>
+					{{/each}}
 					</ul>
 				</div>
 				<div class="ws-2-tab">
+					<ul class="ws-2-list">
+					{{each doing}}
+						<li class="ws-2-item" data-teamId="{{$value.teamId}}" data-projectId="{{$value.projectId}}" data-taskId="{{$value.taskId}}">
+							<p class="task-name">{{$value.taskname}}</p>
+							<p class="prom-name"><span class="glyphicon glyphicon-tasks"></span>{{$value.projectname}}</p>
+						</li>
+					{{/each}}
+					</ul>
+				</div>
+				<div class="ws-2-tab">
+					<ul class="ws-2-list">
+					{{each done}}
+						<li class="ws-2-item" data-teamId="{{$value.teamId}}" data-projectId="{{$value.projectId}}" data-taskId="{{$value.taskId}}">
+							<p class="finish-time">{{$value.finishtime}}</p>
+							<p class="task-name">{{$value.taskname}}</p>
+							<p class="prom-name"><span class="glyphicon glyphicon-tasks"></span>{{$value.projectname}}</p>
+						</li>
+					{{/each}}
+					</ul>
+				</div>
+				<!-- <div class="ws-2-tab">
 					<div class="tip-box">
 						<span class="glyphicon glyphicon-check"></span>
 						<p class="tip">没有已过期的任务</p>
@@ -59,31 +84,31 @@
 							<p class="prom-name"><span class="glyphicon glyphicon-tasks"></span>所属项目</p>
 						</li>
 					</ul>
-				</div>
+				</div> -->
 			</div>
 		</div>
 		<div class="col-md-4 ws-aside">
 			<div class="ws-ad-box">
 				<div class="ws-tt">
-					<img src="1.png" alt="" class="img-circle user-img">Mathilda
+					<i class="img-circle user-img">{{userhead}}</i>{{username}}
 				</div>
 				<div class="row">
 					<div class="col-md-4 aside-itm">
-						<p class="num">1</p>
+						<p class="num">{{todo.length}}</p>
 						<p>待完成任务</p>
 					</div>
 					<div class="col-md-4 aside-itm">
-						<p class="num">1</p>
-						<p>过期任务</p>
+						<p class="num">{{doing.length}}</p>
+						<p>正在做任务</p>
 					</div>
 					<div class="col-md-4 aside-itm last">
-						<p class="num">1</p>
+						<p class="num">{{done.length}}</p>
 						<p>已完成任务</p>
 					</div>
 				</div>	
 			</div>
 
-			<div class="ws-ad-box">
+			<!-- <div class="ws-ad-box">
 				<div class="ws-tt ws-plan-tt">
 					今日日程
 				</div>
@@ -93,7 +118,7 @@
 						<p class="tip">今天没有日程安排</p>
 					</div>
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</div>
 </section>

@@ -59,7 +59,7 @@ a.active {
   color: #CB3848 !important;
 }
 .glyphicon {
-  padding-right: 8px;
+  margin-right: 8px;
   vertical-align: baseline;
 }
 .btn {

@@ -51,7 +51,7 @@
 								<p>您还没有加入团队，请先创建团队</p>
 							</li>
 							<li>
-								<button class="btn sub J_btn_new_project">创建</button>
+								<button class="btn sub J_btn_new_project" disabled="">创建</button>
 								<button class="btn cle J_new_cle">取消</button>
 							</li>
 						</ul>
@@ -135,7 +135,7 @@
 			<div class="ws-tt"><span class="tab-tt">我的任务</span>
 				<ul class="ws-2-tab-head J_tab2_head">
 					<li class="ws-2-tab cur">待完成</li>
-					<li class="ws-2-tab">已过期</li>
+					<!-- <li class="ws-2-tab">已过期</li> -->
 					<li class="ws-2-tab">已完成</li>
 				</ul>
 			</div>
@@ -143,17 +143,18 @@
 				<div class="ws-2-tab">
 					<ul class="ws-2-list">
 						<li class="ws-2-item">
+							<p class="finish-time">2012年12月01</p>
 							<p class="task-name">任务标题</p>
 							<p class="prom-name"><span class="glyphicon glyphicon-tasks"></span>所属项目</p>
 						</li>
 					</ul>
 				</div>
-				<div class="ws-2-tab">
+				<!-- <div class="ws-2-tab">
 					<div class="tip-box">
 						<span class="glyphicon glyphicon-check"></span>
 						<p class="tip">没有已过期的任务</p>
 					</div>
-				</div>
+				</div> -->
 				<div class="ws-2-tab cur">
 					<ul class="ws-2-list">
 						<li class="ws-2-item">
@@ -175,10 +176,10 @@
 						<p class="num">1</p>
 						<p>待完成任务</p>
 					</div>
-					<div class="col-md-4 aside-itm">
+					<!-- <div class="col-md-4 aside-itm">
 						<p class="num">1</p>
 						<p>过期任务</p>
-					</div>
+					</div> -->
 					<div class="col-md-4 aside-itm last">
 						<p class="num">1</p>
 						<p>已完成任务</p>
@@ -205,14 +206,14 @@
 	<header class="tt">
 		项目名称
 		<div class="tt-right">
-			<span class="tt-item"><span class="glyphicon glyphicon-time"></span>日期</span>
-			<span class="tt-item"><span class="glyphicon glyphicon-list"></span>检查项</span>
+			<!-- <span class="tt-item"><span class="glyphicon glyphicon-time"></span>日期</span>
+			<span class="tt-item"><span class="glyphicon glyphicon-list"></span>检查项</span> -->
 			<span class="tt-item"><span class="glyphicon glyphicon-file-open"></span>删除</span>
 			<span class="tt-item J_close_pop"><span class="glyphicon glyphicon-remove"></span></span>
 		</div>
 	</header>
 	<div class="task-info">
-		<h2 class="ti-tt">项目名称</h2>
+		<h2 class="ti-tt">任务名称</h2>
 		<p class="tt-sub"></p>
 		<textarea class="tt-textarea" placeholder="添加任务描述"></textarea>
 		<div class="btngroup">
@@ -221,7 +222,7 @@
 		</div>
 		<ul class="tab-head clearfix">
 			<li class="tab-head-item cur">评论</li>
-			<li class="tab-head-item">活动</li>
+			<!-- <li class="tab-head-item">活动</li> -->
 		</ul>
 		<ul class="tab-body">
 			<li class="tab-body-list">
@@ -239,7 +240,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="task-aside">
+	<!-- <div class="task-aside">
 		<div class="ta-item">
 			<h3 class="ti-tt">分配</h3>
 			<i class="user-img">M</i>
@@ -250,8 +251,9 @@
 			<i class="user-img">M</i>
 			<i class="circle-border"><span class="glyphicon glyphicon-plus"></span></i>
 		</div>
-	</div>
+	</div> -->
 </section>
+
 </article>
 <script src="plugin/jquery/jquery.js"></script>
 <script src="plugin/seajs/sea.js"></script>

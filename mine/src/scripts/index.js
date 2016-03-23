@@ -43,15 +43,21 @@ define(function  (require, exports, module) {
 
 		}).on("click",".J_btn_new_project",function(){
 			//新建项目确定按钮
-			submit.newProject($(this));
+			submit.newProject($(this), function(data) {
+				$("#J_header .J_new_cle").trigger("click");
+				renderSection("tasList",data);
+			});
 
 		}).on("click",".J_btn_new_team",function(){
 			//新建团队确定按钮
-			submit.newTeam($(this));
+			submit.newTeam($(this),function(data){
+				$("#J_header .J_new_cle").trigger("click");
+				renderSection("team",data);
+			});
 
-		}).on("click",".J_team_manage",function(){
+		}).on("click",".J_team_manage",function(data){
 			//团队管理
-			renderSection($(this).data("type"));
+			renderSection($(this).data("type"),data);
 
 		}).on("click",".J_user_exit",function(){
 			//退出当前登录
@@ -59,29 +65,40 @@ define(function  (require, exports, module) {
 
 		});
 
-		$(".J_w_tab_body").on("click",".event-itm",function(){
-			//
-			slideOutTaskDetail();
-		});
+		// $(".J_w_tab_body").on("click",".event-itm",function(){
+		// 	//
+		// 	slideOutTaskDetail();
+		// });
 
-		$(".J_tab2_body").on("click",".ws-2-item",function(){
-			//
-			slideOutTaskDetail($(this));
-		});
+		// $(".J_tab2_body").on("click",".ws-2-item",function(){
+		// 	//
+		// 	slideOutTaskDetail($(this));
+		// });
 
-		$(".J_dit_tab_body").on("click",".ws-2-item",function(){
-			//
-			slideOutTaskDetail($(this));
-		});
+		// $(".J_dit_tab_body").on("click",".ws-2-item",function(){
+		// 	//
+		// 	slideOutTaskDetail($(this));
+		// });
 
 		$("#J_task_detail").on("click",".J_close_pop",function(){
 			//关闭任务详情滑窗
 			slideInTaskDetail();
 		});
 
-		$("#article").on("click",".J_project_item",function(){
-			//加载项目详情
-			renderSection($(this).data("type"));
+		$("#article").on("click",".event-itm",function(){
+			//
+			slideOutTaskDetail();
+		}).on("click",".ws-2-item",function(){
+			//
+			slideOutTaskDetail($(this));
+		}).on("click",".ws-2-item",function(){
+			//
+			slideOutTaskDetail($(this));
+		}).on("click",".J_project_item",function(){
+			//加载项目详情 =>tasklist
+			renderSection($(this).data("type"),function(){
+
+			});
 		}).on("click", ".J_new_task_btn", function(){
 
 			$(this).hide().parents(".task-box").find(".form").slideDown();
@@ -166,12 +183,22 @@ define(function  (require, exports, module) {
 			headItem: ".ms-tabs",
 			bodyItem: ".ms-tabs-item"
 		});
+
+		//团队
+		new Tab({
+			tabHead: ".J_team_tab_head",
+			tabBody: ".J_team_tab_body",
+			headCurClass: "tt-cur",
+			bodyCurClass: "cur",
+			headItem: ".tt-itm",
+			bodyItem: ".ws-main"
+		});
 	}
 
-	function renderSection(type){
+	function renderSection(type,data){
 		$.ajax({
 			type: "get",
-			data: {type: type},
+			data: {type: type,data: data},
 			url:"/getSection",
 			success: function(data){
 				$(".section").replaceWith(data);

@@ -3,9 +3,9 @@ var mongoose = require("mongoose"),
 
 var TeamSchema = new Schema({
     teamname: String,
+    teamower: String,
     teammember: Array,
     teamdesc: String,
-   	username: String,
    	project: Array
 });
 

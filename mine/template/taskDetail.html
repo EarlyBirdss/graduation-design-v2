@@ -1,16 +1,16 @@
 <section class="fixed task-detail" id="J_task_detail">
 	<!-- 任务详情 -->
 	<header class="tt">
-		项目名称
+		{{projectname}}
 		<div class="tt-right">
-			<span class="tt-item"><span class="glyphicon glyphicon-time"></span>日期</span>
-			<span class="tt-item"><span class="glyphicon glyphicon-list"></span>检查项</span>
+			<!-- <span class="tt-item"><span class="glyphicon glyphicon-time"></span>日期</span> -->
+			<!-- <span class="tt-item"><span class="glyphicon glyphicon-list"></span>检查项</span> -->
 			<span class="tt-item"><span class="glyphicon glyphicon-file-open"></span>删除</span>
 			<span class="tt-item"><span class="glyphicon glyphicon-remove"></span></span>
 		</div>
 	</header>
 	<div class="task-info">
-		<h2 class="ti-tt">项目名称</h2>
+		<h2 class="ti-tt">{{taskname}}</h2>
 		<p class="tt-sub"></p>
 		<textarea class="tt-textarea" placeholder="添加任务描述"></textarea>
 		<div class="btngroup">
@@ -19,14 +19,15 @@
 		</div>
 		<ul class="tab-head clearfix">
 			<li class="tab-head-item cur">评论</li>
-			<li class="tab-head-item">活动</li>
+			<!-- <li class="tab-head-item">活动</li> -->
 		</ul>
 		<ul class="tab-body">
+		{{each comment}}
 			<li class="tab-body-list">
 				<div class="user-img">M</div>
-				<p>Mathilda <span class="tab-update-time">2015-12-10</span></p>
+				<p>{{$value.user}} <span class="tab-update-time">{{$value.time}}</span></p>
 				<p class="content-detail">
-					完成了任务！
+					{{$value.text}}
 				</p>
 			</li>
 		</ul>
@@ -37,7 +38,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="task-aside">
+	<!-- <div class="task-aside">
 		<div class="ta-item">
 			<h3 class="ti-tt">分配</h3>
 			<i class="user-img">M</i>
@@ -48,5 +49,5 @@
 			<i class="user-img">M</i>
 			<i class="circle-border"><span class="glyphicon glyphicon-plus"></span></i>
 		</div>
-	</div>
+	</div> -->
 </section>
