@@ -187,7 +187,7 @@
   
   这样的模式我在写js的时候用的也挺多
   
-  ### 最后改一下，因为module.find是异步的，我又在for循环中执行callback，所以最后代码长这样
+### 最后改一下，因为module.find是异步的，我又在for循环中执行callback，所以最后代码长这样
   
       function getDiscoverData(param, callback) {
           var username = param.username;
