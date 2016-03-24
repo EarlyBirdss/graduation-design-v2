@@ -186,3 +186,56 @@
       }      
   
   这样的模式我在写js的时候用的也挺多
+  
+  ### 最后改一下，因为module.find是异步的，我又在for循环中执行callback，所以最后代码长这样
+  
+      function getDiscoverData(param, callback) {
+          var username = param.username;
+          var data = [];
+          var thiscallback = function(data){
+              callback.call(null,data);
+          };
+      
+          UserModel.findOne({
+              username: username
+          }, function(err, user) {
+      
+              var team = user.team;
+              for (var i = 0, len = team.length; i < len; i++) {
+      
+                  (function(i){
+                      TeamModel.findOne({
+                          _id: team[i]
+                      }, function(err, team) {
+                          var thisproject = team.project;
+      
+                          if (!thisproject.length) {
+                              return data;
+                          }
+      
+                          for (var n = 0, len = thisproject.length; i < len; i++) {
+                              var thistask = team.project.task;
+      
+                              if (!thistask.length) {
+                                  return data;
+                              }
+      
+                              for (var j = 0, len = thistask.length; i < len; i++) {
+                                  thistask.projectname = projects[i];
+                              }
+                              data = data.concat(thistask);
+                          }
+      
+                          if(i ===( team.length-1) && typeof callback === "function"){
+                              callback.call(null,data);
+                          }
+      
+                      });
+      
+                  })(i);
+              }
+      
+          });
+      
+      
+      }  
