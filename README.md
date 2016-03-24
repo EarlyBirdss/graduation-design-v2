@@ -189,6 +189,7 @@
   
 ### 最后改一下，因为module.find是异步的，我又在for循环中执行callback，所以最后代码长这样
   
+
       function getDiscoverData(param, callback) {
           var username = param.username;
           var data = [];
@@ -200,33 +201,34 @@
               username: username
           }, function(err, user) {
       
-              var team = user.team;
-              for (var i = 0, len = team.length; i < len; i++) {
+              var teams = user.team;
+              for (var i = 0, len = teams.length; i < len; i++) {
       
                   (function(i){
+                      console.log("time[i]",teams[i],teams.length);
                       TeamModel.findOne({
-                          _id: team[i]
+                          _id: teams[i]
                       }, function(err, team) {
+                          console.log("team",team);
                           var thisproject = team.project;
       
-                          if (!thisproject.length) {
-                              return data;
+                          if(thisproject.length){
+      
+                              for (var n = 0, len = thisproject.length; i < len; i++) {
+                                  var thistask = team.project.task;
+      
+                                  if(thistask.length){
+      
+                                      for (var j = 0, len = thistask.length; i < len; i++) {
+                                          thistask.projectname = projects[i];
+                                      }
+                                      data = data.concat(thistask);
+                                  }
+                              }
                           }
       
-                          for (var n = 0, len = thisproject.length; i < len; i++) {
-                              var thistask = team.project.task;
-      
-                              if (!thistask.length) {
-                                  return data;
-                              }
-      
-                              for (var j = 0, len = thistask.length; i < len; i++) {
-                                  thistask.projectname = projects[i];
-                              }
-                              data = data.concat(thistask);
-                          }
-      
-                          if(i ===( team.length-1) && typeof callback === "function"){
+                          console.log(i , teams.length);
+                          if(i ===( teams.length-1) && typeof callback === "function"){
                               callback.call(null,data);
                           }
       
@@ -238,4 +240,66 @@
           });
       
       
-      }  
+      }
+      
+  然后又懵逼了，可能就是异步的，如上打印结果是这样的
+  
+    time[i] 56f2670f9e03e024914b8034 7
+    time[i] 56f267844b7d477c97e6151d 7
+    time[i] 56f29f172e9e5b34ac960416 7
+    time[i] 56f2a06f822b1814b0292509 7
+    time[i] 56f2a0b902ebf428b3b729c9 7
+    time[i] 56f2a22ed87a0d2cb44e7503 7
+    time[i] 56f2a6a844ebe418b0c6ffca 7
+    team { teammember: [ 'm' ],
+      project: [],
+      __v: 0,
+      teamdesc: 'ff',
+      teamname: 'test',
+      _id: 56f29f172e9e5b34ac960416 }
+    2 7
+    team { teammember: [ 'm' ],
+      project: [],
+      __v: 0,
+      teamdesc: 'qq',
+      teamname: 'qq',
+      _id: 56f2a06f822b1814b0292509 }
+    3 7
+    team { teammember: [ 'm' ],
+      project: [],
+      __v: 0,
+      teamdesc: 'f',
+      teamname: 'f',
+      _id: 56f2670f9e03e024914b8034 }
+    0 7
+    team { teammember: [ 'm' ],
+      project: [],
+      __v: 0,
+      teamdesc: 'ss',
+      teamname: 'tes',
+      _id: 56f267844b7d477c97e6151d }
+    1 7
+    team { teammember: [ 'm' ],
+      project: [],
+      __v: 0,
+      teamdesc: 'ff',
+      teamname: 'ff',
+      _id: 56f2a22ed87a0d2cb44e7503 }
+    5 7
+    team { teammember: [ 'm' ],
+      project: [],
+      __v: 0,
+      teamdesc: 'ff',
+      teamname: 'ff',
+      _id: 56f2a6a844ebe418b0c6ffca }
+    6 7
+    []
+    team { teammember: [ 'm' ],
+      project: [],
+      __v: 0,
+      teamdesc: 'qq',
+      teamname: 'qq',
+      _id: 56f2a0b902ebf428b3b729c9 }
+    4 7
+    
+  i的顺序是打乱的，所以i ===( teams.length-1)的判断逻辑是错误的，最后，写论文真的好坑爹啊，全是赶鸭子上架，也没有很正经的学习，全都按照自己的想法来做，根本不正规啊，常规的mongoose怎么查询我也不知道，偏要把它放在for循环里面，schame里面也没有添加任何静态方法，编写很多重复的代码，数据结构应该怎么组织也没有认真的思考过，子模块根本没用上。
