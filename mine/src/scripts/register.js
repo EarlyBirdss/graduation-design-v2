@@ -31,7 +31,8 @@ define(function  (require, exports, module) {
 					if(data.success === "F"){
 						window.alert(data.errMsg);
 					}else{
-						window.alert(data.message);
+						window.location.href = "/login";
+						// window.alert(data.message);
 					}
 				},
 				error: function(data){

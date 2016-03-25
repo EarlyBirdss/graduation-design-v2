@@ -51,24 +51,24 @@ app.use(session({
 app.get('/home', function(req, res) {
 
     var username = req.session.username;
-
+    // console.log("req.session.username", req.session.username);
     if (!username) {
         res.redirect("/login");
     } else {
         var data = {};
+        var callback = function(data) {
+            // console.log("home", data);
+            data.username = username;
+            data.userhead = getUserhead(username);
+            res.render("index", data);
+            res.end();
+        };
+
         data = getWorkspaceData({
             username: username
-        });
-        data = {
-            teams: [],
-            todo: [],
-            doing: [],
-            done: []
-        };
-        data.teams = [];
-        data.username = username;
-        data.userhead = getUserhead(username);
-        res.render("index", data);
+        }, callback);
+
+
     }
 
 });
@@ -86,7 +86,7 @@ function getTime() {
 
     var date = new Date();
     var year = date.getFullYear();
-    var mouth = date.getMouth() + 1;
+    var mouth = date.getMonth() + 1;
     var day = date.getDate();
     var hour = date.getHours();
     var minute = date.getMinutes();
@@ -112,49 +112,55 @@ function getUserhead(string) {
 }
 
 
-function getDiscoverData(param) {
+function getDiscoverData(param, callback) {
     var username = param.username;
     var data = [];
-    var task = [];
 
     UserModel.findOne({
         username: username
     }, function(err, user) {
 
-        var team = user.team;
-        for (var i = 0, len = team.length; i < len; i++) {
+        var teams = user.team;
 
-            TeamModel.findOne({
-                _id: team[i]
-            }, function(err, team) {
-                var thisproject = team.project;
-
-                if (!thisproject.length) {
-                    console.log("1",data);
-                    return data;
-                }
-
-                for (var n = 0, len = thisproject.length; i < len; i++) {
-                    var thistask = team.project.task;
-
-                    if (!thistask.length) {
-                        console.log("2",data);
-                        return data;
-                    }
-
-                    for (var j = 0, len = thistask.length; i < len; i++) {
-                        thistask.projectname = projects[i];
-                    }
-                    task = task.concat(thistask);
-                }
-
-            });
+        if (!teams.length && typeof callback === "function") {
+            callback.call(null, data);
         }
-        console.log("3",data);
-        return data = task;
+
+        for (var i = 0, len = teams.length; i < len; i++) {
+
+            (function(i) {
+                TeamModel.findOne({
+                    _id: teams[i]
+                }, function(err, team) {
+                    var projects = team.project;
+
+                    if (projects.length) {
+
+                        for (var n = 0, len = projects.length; n < len; n++) {
+                            var tasks = projects[n].task;
+
+                            if (tasks.length) {
+
+                                for (var j = 0, len = tasks.length; j < len; j++) {
+                                    tasks[j].projectname = projects[n].projectname;
+                                }
+                                data = data.concat(tasks);
+                            }
+                        }
+                    }
+
+                    if (i === (teams.length - 1) && typeof callback === "function") {
+                        callback.call(null, data);
+                    }
+
+                });
+
+            })(i);
+        }
+
     });
 
-    return data;
+
 }
 
 function getMessageCenterData(param) {
@@ -162,7 +168,8 @@ function getMessageCenterData(param) {
 
 }
 
-function getProjectData(param) {
+function getProjectData(param, callback) {
+
     var data = {
         teams: []
     };
@@ -170,19 +177,35 @@ function getProjectData(param) {
     UserModel.findOne({
         username: param.username
     }, function(err, user) {
-        var teams = user.teams;
+        var teams = user.team;
+
+        if (!teams.length && typeof callback === "function") {
+            callback.call(null, data);
+        }
 
         for (var i = 0, len = teams.length; i < len; i++) {
-            TeamModel.findOne({
-                teamId: teams[i]
-            }, function(err, team) {
-                data.teams.push(team);
-            });
+
+            (function(i) {
+
+                TeamModel.findOne({
+                    _id: teams[i]
+                }, function(err, team) {
+
+                    data.teams.push(team);
+
+                    if (i === (teams.length - 1) && typeof callback === "function") {
+                        callback.call(null, data);
+                    } 
+
+                });
+
+            })(i);
         }
+
     });
 }
 
-function getTaskDetailData(param) {
+function getTaskDetailData(param, callback) {
     //param teamid  projectid taskid
     var data = {
         teamId: "",
@@ -205,12 +228,16 @@ function getTaskDetailData(param) {
         data.projectname = project.projectname;
         data.comment = task.comment;
 
-        return data;
+        if (typeof callback === "function") {
+            callback.call(null, data);
+        }
+
     });
 }
 
-function getTaskListData(param) {
+function getTaskListData(param, callback) {
     //param teamid  projectid
+    console.log("param",param);
     var data = {
         teamId: "",
         teamname: "",
@@ -225,35 +252,40 @@ function getTaskListData(param) {
         _id: param.teamId
     }, function(err, team) {
 
-        var project = team[param.projectId];
+        var project = team.project[param.projectId];
         // var task = project[param.taskId];
+        console.log("project",project);
         var task = project.task;
         // data.teamId = param.teamId;
-        data.teamId = team._id;
+        data.teamId = team.id;
         data.projectId = param.projectId;
         data.teamname = team.teamname;
         data.projectname = project.projectname;
         for (var i = 0, len = task.length; i < len; i++) {
             switch (task[i].status) {
-                case 1:
+                case "1":
                     todo.push(task[i]);
                     break;
-                case 2:
+                case "2":
                     doing.push(task[i]);
                     break;
-                case 3:
+                case "3":
                     done.push(task[i]);
                     break;
                 default:
                     break;
             }
         }
+
+        if (typeof callback === "function") {
+            callback.call(null, data);
+        }
+
     });
 
-    return data;
 }
 
-function getTeamData(param) {
+function getTeamData(param, callback) {
 
     //param teamid 
     var data = {
@@ -303,12 +335,15 @@ function getTeamData(param) {
         //             break;
         //     }
         // }
-        console.log(data);
-        return data;
+
+        if (typeof callback === "function") {
+            callback.call(null, data);
+        }
+
     });
 }
 
-function getTeamManagementData(param) {
+function getTeamManagementData(param, callback) {
     //param userId
     var username = param.username;
     var data = {
@@ -318,20 +353,38 @@ function getTeamManagementData(param) {
     UserModel.findOne({
         username: param.username
     }, function(err, user) {
-        var teams = user.teams;
+        var teams = user.team;
+
+        if (!teams.length && typeof callback === "function") {
+            callback.call(null, data);
+        }
+
 
         for (var i = 0, len = teams.length; i < len; i++) {
-            TeamModel.findOne({
-                _id: teams[i]
-            }, function(err, team) {
-                data.team.push(team);
-            });
+
+            (function(i) {
+
+                TeamModel.findOne({
+                    _id: teams[i]
+                }, function(err, team) {
+
+                    data.team.push(team);
+
+                    if (i === (teams.length - 1) && typeof callback === "function") {
+                        callback.call(null, data);
+                    }
+
+                });
+
+            })(i);
+
         }
+
     });
 }
 
-function getWorkspaceData(param) {
-
+function getWorkspaceData(param, callback) {
+    console.log("workSpace param", param);
     //param 
     var username = param.username;
     // var teamIds = [];
@@ -349,110 +402,111 @@ function getWorkspaceData(param) {
         var teams = user.team;
         // teamIds = teams;
 
-        if (!teams.length) {
-            return data;
+        if (!teams.length && typeof callback === "function") {
+            callback.call(null, data);
         }
 
         for (var i = 0, len = teams.length; i < len; i++) {
 
-            TeamModel.findOne({
-                _id: teams[i]
-            }, function(err, team) {
-                data.teams.push({
-                    teamId: team._id,
-                    teamname: team.teamname
-                });
+            (function(i) {
+                TeamModel.findOne({
+                    _id: teams[i]
+                }, function(err, team) {
 
-                var projects = team.project || [];
+                    data.teams.push({
+                        teamId: team._id,
+                        teamname: team.teamname
+                    });
 
-                if (!projects.length) {
-                    return data;
-                }
+                    var projects = team.project || [];
 
-                for (var j = 0, jlen = projects.length; i < jlen; j++) {
-                    var task = projects[j].task;
-                    if (task.length) {
-                        for (var p = 0, plen = task.length; p < plen; p++) {
-                            data.affairs = data.affairs.concat(task[p].comment);
-                            switch (task[p].status) {
-                                case 1:
-                                    data.todo.push(task[i]);
-                                    break;
-                                case 2:
-                                    data.doing.push(task[i]);
-                                    break;
-                                case 3:
-                                    data.done.push(task[i]);
-                                    break;
-                                default:
-                                    break;
+                    if (projects.length) {
+                        console.log("project",projects);
+                        for (var j = 0, jlen = projects.length; j < jlen; j++) {
+                            var task = projects[j].task;
+                            console.log("task",task);
+                            if (task.length) {
+                                for (var p = 0, plen = task.length; p < plen; p++) {
+
+                                    data.affairs = data.affairs.concat(task[p].comment);
+                                    console.log("data.affairs",data.affairs);
+                                    switch (task[p].status) {
+                                        case "1":
+                                            data.todo.push(task[i]);
+                                            break;
+                                        case "2":
+                                            data.doing.push(task[i]);
+                                            break;
+                                        case "3":
+                                            data.done.push(task[i]);
+                                            break;
+                                        default:
+                                            break;
+                                    }
+
+                                }
                             }
-
                         }
                     }
-                }
 
-            });
+                    if (i === (teams.length - 1) && typeof callback === "function") {
+                        callback.call(null, data);
+                    }
+
+                });
+            })(i);
         }
-        return data;
+
+
     });
 }
 
 app.get("/getSection", function(req, res, next) {
     var uri = 'template/' + req.query.type;
-    var param = req.query;
+    console.log("req.body",req.body);
+    console.log("req.query");
+    param = req.query.data || {};
     param.username = req.session.username;
     var data;
 
     param.username = req.session.username;
 
+    var callback = function(data) {
+        console.log("callback data", data);
+        var html = template(uri, data);
+        res.send(html);
+        next();
+    };
+
     switch (req.query.type) {
         case "discover":
-            data = getDiscoverData(param);
+            data = getDiscoverData(param, callback);
             break;
         case "messageCenter":
-            data = getMessageCenterData(param);
+            data = getMessageCenterData(param, callback);
             break;
-        case "poject":
-            data = getProjectData(param);
+        case "project":
+            data = getProjectData(param, callback);
             break;
         case "taskDetail":
-            data = getTaskDetailData(param);
+            data = getTaskDetailData(param, callback);
             break;
         case "taskList":
-            data = getTaskListData(param);
+            data = getTaskListData(param, callback);
             break;
         case "team":
-            data = getTeamData(param);
+            data = getTeamData(param, callback);
             break;
         case "teamManagement":
-            data = getTeamManagementData(param);
+            data = getTeamManagementData(param, callback);
             break;
         case "workSpace":
-            data = getWorkspaceData(param);
+            data = getWorkspaceData(param, callback);
             break;
         default:
             break;
     }
-    console.log("421data", data);
-    // var html = template(uri,{
-    //     data: data
-    // });
-    var timer = setInterval(function(){
-        console.log("timer",data);
-        if(data){
 
-            var html = template(uri, {
-                data: data
-            });
-            res.send(html);
-            next();
-
-            clearInterval(timer);
-        }
-
-    },1000);
-    
 });
 
 app.all("/getWorkspace", function(req, res, next) {
@@ -535,7 +589,7 @@ app.all("/submitRegister", function(req, res, next) {
                         success: "T",
                         message: "注册成功"
                     });
-                    res.redirect("/login");
+                    // res.redirect("/login");
                 }
             });
         }
@@ -557,17 +611,12 @@ app.all("/submitNewProject", function(req, res) {
     }, function(err, team) {
 
         if (err) {
-            req.status(500).json({
+            res.status(500).json({
                 success: "F",
                 errMsg: "数据库错误，请稍后再试"
             });
-        } else {
-            // var pIndex = team.projcet.indexOf(param.projectname);
-            // team.project[pIndex].task.push({
-            //     taskname: param.taskname,
-            //     status: param.status,
-            //     finished: false
-            // });
+        } else if(team){
+            console.log(team);
             var projectId = team.project.length;
             team.project.push({
                 teamId: param.teamId,
@@ -580,65 +629,31 @@ app.all("/submitNewProject", function(req, res) {
             TeamModel.update({
                 _id: param.teamId
             }, team, function(err) {
-                req.status(500).json({
-                    success: "F",
-                    errMsg: "数据库错误，请稍后再试"
-                });
-            });
+                console.log("update");
+                console.log(err);
+                if(err){
+                    console.log("if");
+                  res.status(500).json({
+                      success: "F",
+                      errMsg: "数据库错误，请稍后再试"
+                  });  
 
-            res.status(200).json({
-                success: "T",
-                message: "创建成功",
-                data: {
-                    teamId: param.teamId,
-                    projectId: projectId
-                }
+              }else{
+                res.status(200).json({
+                    success: "T",
+                    message: "创建成功",
+                    data: {
+                        teamId: param.teamId,
+                        projectId: projectId
+                    }
+                });
+                res.end();
+              }
+                
             });
+            
         }
     });
-
-    // var project = new ProjectModel({
-    //     projectname: param.projectname,
-    //     teamname: param.teamname
-    // });
-
-    // var username = req.session.username;
-    // UserModel.findOne({
-    //     username: username
-    // }, function(err, user) {
-    //     user.project.push(param.teamname);
-    //     var _id = user._id; //需要取出主键_id
-    //     delete user._id; //再将其删除
-    //     UserModel.update({
-    //         _id: _id
-    //     }, user, function(err) {
-    //         if (err) {
-    //             console.log("UserModel update failed");
-    //             res.status(500).json({
-    //                 success: "F",
-    //                 message: "数据库错误，请稍后再试"
-    //             });
-    //         }
-    //     });
-    //     //此时才能用Model操作，否则报错
-    // });
-
-    // project.save(function(err) {
-    //     if (err) {
-    //         console.log("project save failed");
-    //         console.log(err);
-    //         res.status(500).json({
-    //             success: "F",
-    //             errMsg: "数据库错误，请稍后再试"
-    //         });
-    //     } else {
-    //         res.status(200).json({
-    //             success: "T",
-    //             message: "创建成功"
-    //         });
-    //     }
-    // });
-
 });
 
 app.all("/submitNewTeam", function(req, res) {
@@ -668,7 +683,7 @@ app.all("/submitNewTeam", function(req, res) {
     var team = new TeamModel({
         teamname: param.teamname,
         teamdesc: param.teamdesc,
-        teamovwer: req.session.username,
+        teamower: req.session.username,
         teammember: [req.session.username],
         project: []
     });
@@ -699,16 +714,18 @@ app.all("/submitNewTeam", function(req, res) {
                             success: "F",
                             message: "数据库错误，请稍后再试"
                         });
+                    }else{
+                        res.status(200).json({
+                            success: "T",
+                            message: "创建成功",
+                            data: {
+                                teamId: team._id,
+                                teamname: team.teamname
+                            }
+                        });
                     }
                 });
-
-                res.status(200).json({
-                    success: "T",
-                    message: "创建成功",
-                    data: {
-                        teamId: team._id
-                    }
-                });
+                
             });
         }
     });
@@ -718,7 +735,7 @@ app.all("/submitNewTeam", function(req, res) {
 app.all("/submitQuitTeam", function(req, res) {
 
     var username = req.session.username;
-    var teamname = req.body.teamId;
+    var teamId = req.body.teamId;
     UserModel.findOne({
         username: username
     }, function(err, user) {
@@ -728,7 +745,7 @@ app.all("/submitQuitTeam", function(req, res) {
                 errMsg: "数据库错误，请稍后再试"
             });
         } else {
-            var uIndex = user.team.indexOf(teamname);
+            var uIndex = user.team.indexOf(teamId);
             user.team.splice(uIndex, 1);
             var _uid = user.id;
             UserModel.update({
@@ -752,25 +769,30 @@ app.all("/submitQuitTeam", function(req, res) {
                     errMsg: "数据库错误，请稍后再试"
                 });
             } else {
+
                 var tIndex = team.member.indexOf(username);
                 team.member.splice(tIndex, 1);
                 var _tid = team.id;
+                console.log("768team",team);
                 TeamModel.update({
                     _id: _tid
                 }, team, function(err) {
-                    req.status(500).json({
-                        success: "F",
-                        errMsg: "数据库错误，请稍后再试"
-                    });
-                });
 
-                res.status(200).json({
-                    success: "T",
-                    message: "您已退出" + teamname
+                    if(err){
+                       req.status(500).json({
+                           success: "F",
+                           errMsg: "数据库错误，请稍后再试"
+                       }); 
+                   }else{
+                        res.status(200).json({
+                            success: "T",
+                            message: "您已退出" + teamname
+                        });
+                   }
+                    
                 });
             }
         });
-
 
     });
 });
@@ -798,7 +820,10 @@ app.all("/submitNewTask", function(req, res) {
                 taskId: taskId,
                 taskname: param.taskname,
                 status: param.status,
-                finished: false
+                finished: false,
+                comment:[],
+                createtime: getTime().valueOf(),
+                finishtime: ""
             });
 
             var _tid = team.id;
@@ -806,16 +831,25 @@ app.all("/submitNewTask", function(req, res) {
 
                 _id: _tid
             }, team, function(err) {
-                req.status(500).json({
+                if(err){
+                   res.status(500).json({
                     success: "F",
                     errMsg: "数据库错误，请稍后再试"
+                }); 
+                }
+                res.status(200).json({
+                    success: "T",
+                    message: "创建成功",
+                    data:{
+                        teamId: param.teamId,
+                        projectId: param.projectId,
+                        taskId: taskId,
+                        taskname: param.taskname 
+                    }
                 });
+                
             });
-
-            res.status(200).json({
-                success: "T",
-                message: "创建成功"
-            });
+           
         } else {
             res.status(500).json({
                 success: "F",

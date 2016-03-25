@@ -44,16 +44,19 @@
 							</li>
 							<li>
 								<label for="projectower">项目所属团队</label>
+								{{if teams.length}}
 									<select class="new-select" name="projectower" id="projectower">
 										{{each teams}}
 										<option value="{{$value.teamId}}">{{$value.teamname}}</option>
 										{{/each}}
 									</select>
+								{{else}}
 								<!-- <button class="btn J_new_project">新建团队</button> -->
 								<p>您还没有加入团队，请先创建团队</p>
+								{{/if}}
 							</li>
 							<li>
-								<button class="btn sub J_btn_new_project" disabled="">创建</button>
+								<button class="btn sub J_btn_new_project" {{if teams.length === 0}}disabled=""{{/if}}>创建</button>
 								<button class="btn cle J_new_cle">取消</button>
 							</li>
 						</ul>

@@ -368,8 +368,10 @@ body {
   line-height: 46px;
 }
 .team .p-item .pi-body {
+  float: left;
   width: 180px;
   height: 120px;
+  margin: 20px;
   border: 1px solid #e1e1e1;
   box-shadow: 0 0 3px #e1e1e1;
   text-align: center;

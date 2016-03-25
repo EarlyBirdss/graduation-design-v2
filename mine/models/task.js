@@ -6,10 +6,10 @@ var TaskSchema = new Schema({
 	projectId: Number,
 	taskId: Number,
 	taskname: String,
-	status: Number,
+	status: String,
 	finished: Boolean,
-	createtime: Date,
-	finishtime: Date,
+	createtime: String,
+	finishtime: String,
 	comment: Array
 });
 

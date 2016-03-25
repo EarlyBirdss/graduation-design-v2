@@ -3,8 +3,8 @@
 	<header class="tt">
 		项目名称
 	</header>
-	<ul class="task-status-list J_project_title" data-projectId="{{projectId}}" data-teamId="{{teamId}}" data-projectname="{{projectname}}" data-teamname="teamname">
-		<li class="task-box">
+	<ul class="task-status-list" data-projectname="{{projectname}}" data-teamname="teamname">
+		<li class="task-box J_project_title" data-projectId="{{projectId}}" data-teamId="{{teamId}}" data-status="1">
 			<ul>
 				<li class="task-status">要做</li>
 				{{each todo}}
@@ -18,7 +18,7 @@
 				<li class="task-new J_new_task_btn">新建任务</li>
 			</ul>
 		</li>
-		<li class="task-box">
+		<li class="task-box J_project_title" data-projectId="{{projectId}}" data-teamId="{{teamId}}" data-status="2">
 			<ul>
 				<li class="task-status">正在做</li>
 				{{each doing}}
@@ -32,7 +32,7 @@
 				<li class="task-new J_new_task_btn">新建任务</li>
 			</ul>
 		</li>
-		<li class="task-box">
+		<li class="task-box J_project_title" data-projectId="{{projectId}}" data-teamId="{{teamId}}" data-status="3">
 			<ul>
 				<li class="task-status">已完成</li>
 				{{each done}}
