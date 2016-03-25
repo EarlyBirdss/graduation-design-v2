@@ -15,11 +15,13 @@
 				<a href="index.html" class="logo"></a>
 			</div>
 			<div class="col-md-6">
+			{{if 0}}
 				<!-- <div class="form-inline">
 					<span class="glyphicon glyphicon-search search-icon"></span>
 					<input type="text" class="search-input form-control" placeholder="搜索···">
 					<button class="btn btn-default search-btn">搜索</button>
 				</div>	 -->
+			{{/if}}
 			</div>
 			<div class="col-md-4">
 				<div class="col-md-4">
@@ -42,12 +44,12 @@
 								<label for="projectname">项目名称</label>
 								<input class="new-input" type="text" placeholder="项目名称" id="projectname" name="projectname">
 							</li>
-							<li>
+							<li class="J_team_list">
 								<label for="projectower">项目所属团队</label>
 								{{if teams.length}}
 									<select class="new-select" name="projectower" id="projectower">
 										{{each teams}}
-										<option value="{{$value.teamId}}">{{$value.teamname}}</option>
+										<option value="{{$value.id}}">{{$value.teamname}}</option>
 										{{/each}}
 									</select>
 								{{else}}
@@ -104,6 +106,15 @@
 		<li class="a-list cur" data-type="workSpace"><span class="glyphicon glyphicon-briefcase"></span>工作台</li>
 		<li class="a-list" data-type="discover"><span class="glyphicon glyphicon-eye-open"></span>发现</li>
 		<li class="a-list" data-type="project"><span class="glyphicon glyphicon-folder-open"></span>项目</li>
+		{{each teams}}
+		<li class="a-list" data-type="team" data-teamId="{{$value.id}}"><span class="glyphicon glyphicon-briefcase"></span>{{$value.teamname}}
+			<ul>
+				{{each $value.project}}
+				<li class="project-list" data-type="taskList" data-teamId="{{$value.teamId}}" data-projectId="{{$value.projectId}}"><span class="glyphicon glyphicon-folder-open"></span>{{$value.projectname}}</li>
+				{{/each}}
+			</ul>
+		</li>
+		{{/each}}
 	</ul>
 </aside>
 <section class="section work-space" id="work_space">
@@ -146,9 +157,9 @@
 					<li class="ws-2-tab">已完成</li>
 				</ul>
 			</div>
-			<div class="ws-2-tab-body J_tab2_body">
+			<div class="ws-2-tab-body J_tab2_body cur">
 				<div class="ws-2-tab">
-					<ul class="ws-2-list">
+					<ul class="ws-2-list cur">
 					{{each todo}}
 						<li class="ws-2-item" data-teamId="{{$value.teamId}}" data-projectId="{{$value.projectId}}" data-taskId="{{$value.taskId}}">
 							<p class="task-name">{{$value.taskname}}</p>
@@ -178,6 +189,7 @@
 					{{/each}}
 					</ul>
 				</div>
+				{{if 0}}
 				<!-- <div class="ws-2-tab">
 					<div class="tip-box">
 						<span class="glyphicon glyphicon-check"></span>
@@ -193,6 +205,7 @@
 						</li>
 					</ul>
 				</div> -->
+				{{/if}}
 			</div>
 		</div>
 		<div class="col-md-4 ws-aside">
@@ -215,7 +228,7 @@
 					</div>
 				</div>	
 			</div>
-
+			{{if 0}}
 			<!-- <div class="ws-ad-box">
 				<div class="ws-tt ws-plan-tt">
 					今日日程
@@ -227,60 +240,63 @@
 					</div>
 				</div>
 			</div> -->
+			{{/if}}
 		</div>
 	</div>
 </section>
 <section class="fixed task-detail" id="J_task_detail">
 	<!-- 任务详情 -->
-	<header class="tt">
-		项目名称
-		<div class="tt-right">
-			<!-- <span class="tt-item"><span class="glyphicon glyphicon-time"></span>日期</span>
-			<span class="tt-item"><span class="glyphicon glyphicon-list"></span>检查项</span> -->
-			<span class="tt-item"><span class="glyphicon glyphicon-file-open"></span>删除</span>
-			<span class="tt-item J_close_pop"><span class="glyphicon glyphicon-remove"></span></span>
-		</div>
-	</header>
-	<div class="task-info">
-		<h2 class="ti-tt">任务名称</h2>
-		<p class="tt-sub"></p>
-		<textarea class="tt-textarea" placeholder="添加任务描述"></textarea>
-		<div class="btngroup">
-			<a href="javascript:;" class="btn btn-save">保存</a>
-			<a href="javascript:;" class="btn btn-cle">取消</a>
-		</div>
-		<ul class="tab-head clearfix">
-			<li class="tab-head-item cur">评论</li>
-			<!-- <li class="tab-head-item">活动</li> -->
-		</ul>
-		<ul class="tab-body">
-			<li class="tab-body-list">
-				<div class="user-img">M</div>
-				<p>Mathilda <span class="tab-update-time">2015-12-10</span></p>
-				<p class="content-detail">
-					完成了任务！
-				</p>
-			</li>
-		</ul>
-		<div class="new-comment">
-			<textarea name="" id="" cols="30" rows="10" class="nc-textarea"></textarea>
-			<div class="tool-bar">
-				<a href="javascript:;" class="nc-btn">发表评论</a>
-			</div>
+	{{if 0}}
+<!-- 	<header class="tt">
+	项目名称
+	<div class="tt-right">
+		<span class="tt-item"><span class="glyphicon glyphicon-time"></span>日期</span>
+		<span class="tt-item"><span class="glyphicon glyphicon-list"></span>检查项</span>
+		<span class="tt-item"><span class="glyphicon glyphicon-file-open"></span>删除</span>
+		<span class="tt-item J_close_pop"><span class="glyphicon glyphicon-remove"></span></span>
+	</div>
+</header>
+<div class="task-info">
+	<h2 class="ti-tt">任务名称</h2>
+	<p class="tt-sub"></p>
+	<textarea class="tt-textarea" placeholder="添加任务描述"></textarea>
+	<div class="btngroup">
+		<a href="javascript:;" class="btn btn-save">保存</a>
+		<a href="javascript:;" class="btn btn-cle">取消</a>
+	</div>
+	<ul class="tab-head clearfix">
+		<li class="tab-head-item cur">评论</li>
+		<li class="tab-head-item">活动</li>
+	</ul>
+	<ul class="tab-body">
+		<li class="tab-body-list">
+			<div class="user-img">M</div>
+			<p>Mathilda <span class="tab-update-time">2015-12-10</span></p>
+			<p class="content-detail">
+				完成了任务！
+			</p>
+		</li>
+	</ul>
+	<div class="new-comment">
+		<textarea name="" id="" cols="30" rows="10" class="nc-textarea"></textarea>
+		<div class="tool-bar">
+			<a href="javascript:;" class="nc-btn">发表评论</a>
 		</div>
 	</div>
-	<!-- <div class="task-aside">
-		<div class="ta-item">
-			<h3 class="ti-tt">分配</h3>
-			<i class="user-img">M</i>
-			<i class="circle-border"><span class="glyphicon glyphicon-plus"></span></i>
-		</div>
-		<div class="ta-item">
-			<h3 class="ti-tt">关注</h3>
-			<i class="user-img">M</i>
-			<i class="circle-border"><span class="glyphicon glyphicon-plus"></span></i>
-		</div>
-	</div> -->
+</div>
+<div class="task-aside">
+	<div class="ta-item">
+		<h3 class="ti-tt">分配</h3>
+		<i class="user-img">M</i>
+		<i class="circle-border"><span class="glyphicon glyphicon-plus"></span></i>
+	</div>
+	<div class="ta-item">
+		<h3 class="ti-tt">关注</h3>
+		<i class="user-img">M</i>
+		<i class="circle-border"><span class="glyphicon glyphicon-plus"></span></i>
+	</div>
+</div> -->
+{{/if}}
 </section>
 
 </article>

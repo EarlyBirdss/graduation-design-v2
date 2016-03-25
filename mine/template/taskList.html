@@ -1,17 +1,17 @@
 <section class="section task-list" id="J_task_list">
 	<!-- 任务详情 -->
 	<header class="tt">
-		项目名称
+		<span class="glyphicon glyphicon-tasks"></span>{{projectname}}
 	</header>
 	<ul class="task-status-list" data-projectname="{{projectname}}" data-teamname="teamname">
 		<li class="task-box J_project_title" data-projectId="{{projectId}}" data-teamId="{{teamId}}" data-status="1">
 			<ul>
 				<li class="task-status">要做</li>
 				{{each todo}}
-				<li><input type="checkbox" class="task-fanish J_task_fanish_btn"><span class="J_task_title" data-taskId="{{$value.taskId}}">{{$value.taskname}} </span><span class="glyphicon glyphicon-remove"></span></li>
+				<li><input type="checkbox" class="task-fanish J_task_fanish_btn" {{if $value.finished}}checked=""{{/if}}><span class="J_task_title task-title {{if $value.finished}}finished{{/if}}" data-taskId="{{$value.taskId}}">{{$value.taskname}} </span><span class="glyphicon glyphicon-remove J_delete_task"></span></li>
 				{{/each}}
 				<li class="form">
-					<textarea class="textarea" name="task" id="task" cols="10" rows="3"></textarea>
+					<textarea class="textarea J_task_name" name="task" id="task" cols="10" rows="3"></textarea>
 					<button class="btn cfm J_new_task_cfm">创建</button>
 					<button class="btn cle J_new_task_cle">取消</button>
 				</li>
@@ -22,10 +22,10 @@
 			<ul>
 				<li class="task-status">正在做</li>
 				{{each doing}}
-				<li><input type="checkbox" class="task-fanish J_task_fanish_btn"><span class="J_task_title" data-taskId="{{$value.taskId}}">{{$value.taskname}} </span><span class="glyphicon glyphicon-remove"></span></li>
+				<li><input type="checkbox" class="task-fanish J_task_fanish_btn" {{if $value.finished}}checked=""{{/if}}><span class="J_task_title task-title{{if $value.finished}}finished{{/if}}" data-taskId="{{$value.taskId}}">{{$value.taskname}} </span><span class="glyphicon glyphicon-remove J_delete_task"></span></li>
 				{{/each}}
 				<li class="form">
-					<textarea class="textarea" name="task" id="task" cols="10" rows="3"></textarea>
+					<textarea class="textarea J_task_name" name="task" id="task" cols="10" rows="3"></textarea>
 					<button class="btn cfm J_new_task_cfm">创建</button>
 					<button class="btn cle J_new_task_cle">取消</button>
 				</li>
@@ -36,10 +36,10 @@
 			<ul>
 				<li class="task-status">已完成</li>
 				{{each done}}
-				<li><input type="checkbox" class="task-fanish J_task_fanish_btn"><span class="J_task_title" data-taskId="{{$value.taskId}}">{{$value.taskname}} </span><span class="glyphicon glyphicon-remove"></span></li>
+				<li><input type="checkbox" class="task-fanish J_task_fanish_btn" {{if $value.finished}}checked=""{{/if}}><span class="J_task_title task-title{{if $value.finished}}finished{{/if}}" data-taskId="{{$value.taskId}}">{{$value.taskname}} </span><span class="glyphicon glyphicon-remove  J_delete_task"></span></li>
 				{{/each}}
 				<li class="form">
-					<textarea class="textarea" name="task" id="task" cols="10" rows="3"></textarea>
+					<textarea class="textarea J_task_name" name="task" id="task" cols="10" rows="3"></textarea>
 					<button class="btn cfm J_new_task_cfm">创建</button>
 					<button class="btn cle J_new_task_cle">取消</button>
 				</li>

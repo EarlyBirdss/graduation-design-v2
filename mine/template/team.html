@@ -1,4 +1,4 @@
-<section class="section team" id="team">
+<section class="section team" id="J_team" data-teamId="{{teamId}}">
 	<!-- 团队 -->
 	<header class="tt">
 		<div class="col-md-9">
@@ -14,13 +14,16 @@
 			<div class="ws-tt">成员</div>
 			<ul class="p-list clearfix">
 				<li class="teamer-item add-teamer">
-					<span class="glyphicon glyphicon-plus"></span>添加成员
+					<span class="glyphicon glyphicon-plus J_add_teamer"></span>添加成员
+					<div class="add-teamer-form" data-teamId="{{teamId}}">
+						<input class="input" type="text" id="teamername" name="teamername" placeholder="请输入成员用户名"><button class="btn btn-cfm J_add_teamer_cfm">确认添加</button><button class="btn btn-cle J_add_teamer_cle">取消</button>
+					</div>
 				</li>
-				<li class="teamer-item">
-					{{each member}}
+				{{each member}}
+				<li class="teamer-item J_teamer_item">
 					<i class="user-img circle-img">{{$value.userhead}}</i>{{$value.username}}
-					{{/each}}
 				</li>
+				{{/each}}
 			</ul>
 		</div>
 
@@ -28,7 +31,7 @@
 			<!-- <div class="ws-tt">{{teamname}}</div> -->
 			<ul class="p-list clearfix">
 			{{each projects}}
-				<li class="p-item J_project_item" data-type="taskList" data-projectId="{{$value.projectId}}" data-teamId="{{teamId}}">
+				<li class="p-item J_project_item" data-type="taskList" data-projectId="{{$value.projectId}}" data-teamId="{{$value.teamId}}">
 					<div class="pi-body">
 						<i class="icon-pro glyphicon glyphicon-inbox"></i>
 						<p>{{$value.projectname}}</p>

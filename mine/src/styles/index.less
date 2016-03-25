@@ -147,7 +147,7 @@ body{
 	height:100%;
 	background:rgba(0,0,0,.9);
 	.a-list{
-		height:45px;
+		// height:45px;
 		padding-left: 20px;
 		line-height: 45px;
 		overflow: auto;
@@ -159,6 +159,9 @@ body{
 	.a-list.cur{
 		background:rgba(0,0,0,.5);
 		color:@itemcolor;
+	}
+	.project-list{
+		text-indent: 15px;
 	}
 
 }
@@ -386,6 +389,30 @@ body{
 		}
 
 	}
+	.add-teamer-form{
+		display: none;
+		.input{
+			width: 150px;
+			margin-right: 20px;
+			padding: 6px 8px;
+			border-radius: 5px;
+			border: 1px solid @bordergray;
+			box-shadow: 0 0 2px @bordergray;
+		}
+		.btn{
+			padding:6px 15px;
+		}
+		.btn-cfm{
+			background:@buttoncolor;
+			color:#fff;
+			margin-right: 10px;
+		}
+		.btn-cle{
+			background: #fff;
+			border:1px solid @buttoncolor;
+			color:@buttoncolor;
+		}
+	}
 }
 // 团队管理
 .team-management{
@@ -544,8 +571,10 @@ body{
 				line-height: 46px;
 			}
 			.pi-body{
+				float: left;
 				width: 180px;
 				height: 120px;
+				margin: 20px;
 				border:1px solid @bordergray;
 				box-shadow: 0 0 3px @bordergray;
 				text-align: center;
@@ -884,6 +913,12 @@ body{
 			border-bottom:1px solid @bordergray;
 			.task-fanish{
 				margin-right: 8px;
+			}
+			.task-title{
+				cursor: pointer;
+			}
+			.finished{
+				text-decoration: line-through;
 			}
 			.glyphicon{
 				display: none;

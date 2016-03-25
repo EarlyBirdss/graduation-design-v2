@@ -136,7 +136,6 @@ body {
   background: rgba(0, 0, 0, 0.9);
 }
 .aside .a-list {
-  height: 45px;
   padding-left: 20px;
   line-height: 45px;
   overflow: auto;
@@ -148,6 +147,9 @@ body {
 .aside .a-list.cur {
   background: rgba(0, 0, 0, 0.5);
   color: #992200;
+}
+.aside .project-list {
+  text-indent: 15px;
 }
 .section {
   position: absolute;
@@ -382,6 +384,30 @@ body {
   padding: 30px 0 10px 0;
   color: #992200;
 }
+.team .add-teamer-form {
+  display: none;
+}
+.team .add-teamer-form .input {
+  width: 150px;
+  margin-right: 20px;
+  padding: 6px 8px;
+  border-radius: 5px;
+  border: 1px solid #e1e1e1;
+  box-shadow: 0 0 2px #e1e1e1;
+}
+.team .add-teamer-form .btn {
+  padding: 6px 15px;
+}
+.team .add-teamer-form .btn-cfm {
+  background: #41c1a2;
+  color: #fff;
+  margin-right: 10px;
+}
+.team .add-teamer-form .btn-cle {
+  background: #fff;
+  border: 1px solid #41c1a2;
+  color: #41c1a2;
+}
 .team-management .tt .new-team-btn {
   float: right;
   background: #992200;
@@ -523,8 +549,10 @@ body {
   line-height: 46px;
 }
 .project .p-body .p-item .pi-body {
+  float: left;
   width: 180px;
   height: 120px;
+  margin: 20px;
   border: 1px solid #e1e1e1;
   box-shadow: 0 0 3px #e1e1e1;
   text-align: center;
@@ -841,6 +869,12 @@ body {
 }
 .task-list .task-box li .task-fanish {
   margin-right: 8px;
+}
+.task-list .task-box li .task-title {
+  cursor: pointer;
+}
+.task-list .task-box li .finished {
+  text-decoration: line-through;
 }
 .task-list .task-box li .glyphicon {
   display: none;

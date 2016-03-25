@@ -1,6 +1,6 @@
 <section class="section project" id="J_project_list">
 	<header class="tt">
-		<span class="glyphicon glyphicon-folder-open"></span></span>项目
+		<span class="glyphicon glyphicon-folder-open"></span>项目
 	</header>
 	<div class="p-body">
 		<ul class="p-list">
@@ -8,10 +8,12 @@
 			<li class="p-item">
 				<h2 class="pi-tt">{{$value.teamname}}</h2>
 				{{each $value.project}}
-					<div class="pi-body J_project_item" data-type="taskList" data-teamId="{{$value.teamId}}" data-projectId="{{$value.projectId}}">
-						<i class="icon-pro glyphicon glyphicon-inbox"></i>
-						<p>{{$value.projectname}}</p>
-					</div>
+					<ul class="clearfix">
+						<li class="pi-body J_project_item" data-type="taskList" data-teamId="{{$value.teamId}}" data-projectId="{{$value.projectId}}">
+							<i class="icon-pro glyphicon glyphicon-inbox"></i>
+							<p>{{$value.projectname}}</p>
+						</li>
+					</ul>
 				{{/each}}
 			</li>
 		{{/each}}
