@@ -70,7 +70,7 @@ define(function(require, exports, module) {
 					"<span class=\"glyphicon glyphicon-briefcase\"></span>" + data.teamname +
 					"<ul></ul>" +
 					"</li>";
-				$("#J_aside ul").append(teamLiHtml);
+				$("#J_aside .J_aside_team_list").append(teamLiHtml);
 				if (projectower.length) {
 					projectower.append("<option value=\"" + data.teamId + "\">" + data.teamname + "</option>");
 				} else {
