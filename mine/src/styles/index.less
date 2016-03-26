@@ -199,6 +199,16 @@ body{
 	.ws-warp{
 		padding:15px;
 	}
+	.tip-box{
+		min-height: 320px;
+		text-align: center;
+		color:@bordergray;
+		font-size: 32px;
+		.glyphicon{
+			font-size: 52px;
+			padding:20px;
+		}
+	}
 	.ws-main{
 		display: none;
 		border:1px solid @bordergray;
@@ -282,16 +292,6 @@ body{
 					padding:8px 0;
 					font-size: 16px;
 					color:@blank;
-				}
-				.tip-box{
-					min-height: 320px;
-					text-align: center;
-					color:@bordergray;
-					font-size: 32px;
-					.glyphicon{
-						font-size: 52px;
-						padding:20px;
-					}
 				}
 			}
 			.cur{
@@ -791,6 +791,7 @@ body{
 		}
 		.tt-sub{
 			color:@buttoncolor;
+			cursor: pointer;
 		}
 		.tt-textarea{
 			margin-top: 10px;

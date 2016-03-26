@@ -8,25 +8,25 @@
 	</header>
 	<div class="task-info">
 		<h2 class="ti-tt">{{task.taskname}}</h2>
-		<p class="tt-sub">{{task.desc}}</p>
-		<div class="J_taskdesc_form" data-teamId="{{teamId}}" data-projectId="{{projectId}}" data-taskId="{{task.taskId}}">
-			<textarea class="tt-textarea" id="taskdesc" name="taskdesc" placeholder="添加任务描述"></textarea>
+		<p class="tt-sub J_task_desc" alt="编辑">{{task.taskdesc}}</p>
+		<div class="J_taskdesc_form {{if task.taskdesc}}myhide{{/if}}" data-teamId="{{teamId}}" data-projectId="{{projectId}}" data-taskId="{{task.taskId}}">
+			<textarea class="tt-textarea" id="taskdesc" name="taskdesc" placeholder="添加任务描述" value="{{task.taskdesc}}"></textarea>
 			<div class="btngroup">
 				<a href="javascript:;" class="btn btn-save J_taskdesc_cfm">保存</a>
-				<a href="javascript:;" class="btn btn-cle">取消</a>
+				<a href="javascript:;" class="btn btn-cle J_taskdesc_cle">取消</a>
 			</div>
 		</div>
 		<ul class="tab-head clearfix">
 			<li class="tab-head-item cur">评论</li>
 			<!-- <li class="tab-head-item">活动</li> -->
 		</ul>
-		<ul class="tab-body">
+		<ul class="tab-body J_comment_list">
 		{{each task.comment}}
 			<li class="tab-body-list">
-				<div class="user-img">{{$value.userhead}}</div>
-				<p>{{$value.user}} <span class="tab-update-time">{{$value.time}}</span></p>
+				<div class="user-img">{{$value.userheader}}</div>
+				<p>{{$value.user}} <span class="tab-update-time">{{$value.date}}</span></p>
 				<p class="content-detail">
-					{{$value.text}}
+					{{$value.content}}
 				</p>
 			</li>
 		{{/each}}

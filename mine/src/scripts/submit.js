@@ -294,6 +294,37 @@ define(function(require, exports, module) {
 				}
 			});
 		},
+		// updateTaskdesc:function($this,callback){
+		// 	var J_taskdesc_form = $(".J_taskdesc_form");
+		// 	var data = {
+		// 		teamId: J_taskdesc_form.data("teamid"),
+		// 		projectId: J_taskdesc_form.data("projectid"),
+		// 		taskId: J_taskdesc_form.data("taskid"),
+		// 		taskdesc: $("#taskdesc").val()
+		// 	};
+
+		// 	$.ajax({
+		// 		type: "post",
+		// 		url: "/submitUpdateTaskDesc",
+		// 		datatype: "json",
+		// 		data: data,
+		// 		success: function(data){
+		// 			if (data.success === "F") {
+		// 				// layer.alert(data.errMsg, {icon: 6});
+		// 				window.alert(data.errMsg);
+		// 			} else {
+		// 				if (typeof callback === "function") {
+		// 					callback.call(null,data.data);
+		// 				}
+		// 			}
+		// 		},
+		// 		error: function(data){
+		// 			if(data.errMsg){
+		// 				window.alert(data.errMsg);
+		// 			}
+		// 		}
+		// 	});
+		// },
 		addComment: function($this,callback){
 			var J_new_comment_form = $(".J_new_comment_form");
 
@@ -301,7 +332,7 @@ define(function(require, exports, module) {
 				teamId: J_new_comment_form.data("teamid"),
 				projectId: J_new_comment_form.data("projectid"),
 				taskId: J_new_comment_form.data("taskid"),
-				taskdesc: $("#comment").val()
+				content: $("#comment").val()
 			};
 
 			$.ajax({

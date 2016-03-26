@@ -104,7 +104,7 @@
 <aside class="aside" id="J_aside">
 	<ul>
 		<li class="a-list cur" data-type="workSpace"><span class="glyphicon glyphicon-briefcase"></span>工作台</li>
-		<li class="a-list" data-type="discover"><span class="glyphicon glyphicon-eye-open"></span>发现</li>
+		<!-- <li class="a-list" data-type="discover"><span class="glyphicon glyphicon-eye-open"></span>发现</li> -->
 		<li class="a-list" data-type="project"><span class="glyphicon glyphicon-folder-open"></span>项目</li>
 		{{each teams}}
 		<li class="a-list" data-type="team" data-teamId="{{$value.id}}"><span class="glyphicon glyphicon-briefcase"></span>{{$value.teamname}}
@@ -131,11 +131,12 @@
 	<div class="ws-warp J_w_tab_body">
 		<div class="col-md-8 ws-main tab1 cur">
 			<div class="ws-tt">最新动态<!-- <a href="javascript:;" class="refrench">刷新</a> --></div>
+			{{if affairs.length}}
 			<ul>
 			{{each affairs}}
 				<li class="event-itm" data-teamId="{{$value.teamId}}" data-projectId="{{$value.projectId}}" data-taskId="{{$value.taskId}}">
 					<div class="col-md-2">
-						<a href=""><i class="img-circle user-img">{{$value.userhead}}</i><span class="user-name">{{$value.user}}</span></a>
+						<a href=""><i class="img-circle user-img">{{$value.userheader}}</i><span class="user-name">{{$value.user}}</span></a>
 					</div>
 					<div class="col-md-8">
 						<p class="brief">{{$value.content}}</p>
@@ -147,6 +148,12 @@
 				</li>
 			{{/each}}
 			</ul>
+			{{else}}
+			<div class="tip-box">
+				<span class="glyphicon glyphicon-check"></span>
+				<p class="tip">您还没有动态内容</p>
+			</div>
+			{{/if}}
 			<!-- <a href="javascript:;" class="btn btn-more">加载更多</a> -->
 		</div>
 		<div class="col-md-8 ws-main tab2">
@@ -158,8 +165,9 @@
 				</ul>
 			</div>
 			<div class="ws-2-tab-body J_tab2_body cur">
-				<div class="ws-2-tab">
-					<ul class="ws-2-list cur">
+				<div class="ws-2-tab cur">
+					{{if todo.length}}
+					<ul class="ws-2-list">
 					{{each todo}}
 						<li class="ws-2-item" data-teamId="{{$value.teamId}}" data-projectId="{{$value.projectId}}" data-taskId="{{$value.taskId}}">
 							<p class="task-name">{{$value.taskname}}</p>
@@ -167,8 +175,15 @@
 						</li>
 					{{/each}}
 					</ul>
+					{{else}}
+					<div class="tip-box">
+						<span class="glyphicon glyphicon-check"></span>
+						<p class="tip">没有待完成的任务</p>
+					</div>
+					{{/if}}
 				</div>
 				<div class="ws-2-tab">
+					{{if doing.length}}
 					<ul class="ws-2-list">
 					{{each doing}}
 						<li class="ws-2-item" data-teamId="{{$value.teamId}}" data-projectId="{{$value.projectId}}" data-taskId="{{$value.taskId}}">
@@ -177,8 +192,15 @@
 						</li>
 					{{/each}}
 					</ul>
+					{{else}}
+					<div class="tip-box">
+						<span class="glyphicon glyphicon-check"></span>
+						<p class="tip">没有已过期的任务</p>
+					</div>
+					{{/if}}
 				</div>
 				<div class="ws-2-tab">
+					{{if done.length}}
 					<ul class="ws-2-list">
 					{{each done}}
 						<li class="ws-2-item" data-teamId="{{$value.teamId}}" data-projectId="{{$value.projectId}}" data-taskId="{{$value.taskId}}">
@@ -188,6 +210,12 @@
 						</li>
 					{{/each}}
 					</ul>
+					{{else}}
+					<div class="tip-box">
+						<span class="glyphicon glyphicon-check"></span>
+						<p class="tip">没有已过期的任务</p>
+					</div>
+					{{/if}}
 				</div>
 				{{if 0}}
 				<!-- <div class="ws-2-tab">
@@ -211,7 +239,7 @@
 		<div class="col-md-4 ws-aside">
 			<div class="ws-ad-box">
 				<div class="ws-tt">
-					<i class="img-circle user-img">{{userhead}}</i>{{username}}
+					<i class="img-circle user-img">{{userheader}}</i>{{username}}
 				</div>
 				<div class="row">
 					<div class="col-md-4 aside-itm">

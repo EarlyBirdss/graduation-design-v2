@@ -77,11 +77,11 @@ define(function(require, exports, module) {
 
 				$("#J_header .J_new_cle").trigger("click");
 
-				$("#J_aside .a-list").each(function(){
-					console.log("50",$(this),data);
-					if($(this).data("teamid") === data.teamId){
-						var projectListHtml = "<li class=\"project-list\" data-type=\"taskList\" data-teamId=\""+ data.teamId +"\" data-projectId=\""+data.projectId+"\">"+
-												"<span class=\"glyphicon glyphicon-folder-open\"></span>"+ data.projectname+"</li>";
+				$("#J_aside .a-list").each(function() {
+					console.log("50", $(this), data);
+					if ($(this).data("teamid") === data.teamId) {
+						var projectListHtml = "<li class=\"project-list\" data-type=\"taskList\" data-teamId=\"" + data.teamId + "\" data-projectId=\"" + data.projectId + "\">" +
+							"<span class=\"glyphicon glyphicon-folder-open\"></span>" + data.projectname + "</li>";
 						$(this).find("ul").append(projectListHtml);
 					}
 				});
@@ -96,10 +96,10 @@ define(function(require, exports, module) {
 				$("#J_header .J_new_cle").trigger("click");
 				renderSection("team", data);
 				var projectower = $("#projectower");
-				var teamLiHtml = "<li class=\"a-list\" data-type=\"team\" data-teamId=\""+data.teamId+"\">"+
-									"<span class=\"glyphicon glyphicon-briefcase\"></span>"+ data.teamname +
-										"<ul></ul>"+
-								"</li>";
+				var teamLiHtml = "<li class=\"a-list\" data-type=\"team\" data-teamId=\"" + data.teamId + "\">" +
+					"<span class=\"glyphicon glyphicon-briefcase\"></span>" + data.teamname +
+					"<ul></ul>" +
+					"</li>";
 				$("#J_aside ul").append(teamLiHtml);
 				if (projectower.length) {
 					projectower.append("<option value=\"" + data.teamId + "\">" + data.teamname + "</option>");
@@ -123,45 +123,49 @@ define(function(require, exports, module) {
 
 		});
 
-		// $(".J_w_tab_body").on("click",".event-itm",function(){
-		// 	//
-		// 	slideOutTaskDetail();
-		// });
-
-		// $(".J_tab2_body").on("click",".ws-2-item",function(){
-		// 	//
-		// 	slideOutTaskDetail($(this));
-		// });
-
-		// $(".J_dit_tab_body").on("click",".ws-2-item",function(){
-		// 	//
-		// 	slideOutTaskDetail($(this));
-		// });
 
 		$("#J_task_detail").on("click", ".J_close_pop", function() {
 			//关闭任务详情滑窗
 			slideInTaskDetail();
-		}).on("click",".J_taskdesc_cfm",function(){
+		}).on("click", ".J_taskdesc_cfm", function() {
 			//添加任务描述
-			submit.addTaskDesc($(this),function(data){
-
+			submit.addTaskDesc($(this), function(data) {
+				$(".J_task_desc").html(data.taskdesc).next(".J_taskdesc_form").slideUp("fast");
 			});
-		}).on("click",".J_new_comment_cfm",function(){
+		}).on("click", ".J_new_comment_cfm", function() {
 			//评论
-			submit.addComment($(this),function(data){
+			submit.addComment($(this), function(data) {
+				var commentListHtml = "<li class=\"tab-body-list\">" +
+					"<div class=\"user-img\">" + data.userheader + "</div>" +
+					"<p>" + data.username + "<span class=\"tab-update-time\">" + data.date + "</span></p>" +
+					"<p class=\"content-detail\">" + data.content + "</p></li>"
 
+				$("#J_task_detail .J_comment_list").append(commentListHtml);
+				$("#comment").val("");
 			});
+		}).on("click",".J_task_desc",function(){
+			//编辑任务描述
+
+			var $this = $(this);
+			$this.slideUp("fast").next(".J_taskdesc_form").slideDown("fast");
+			submit.addTaskDesc($(this),function(data){
+				$this.html(data.taskdesc).next(".J_taskdesc_form").slideUp("fast");
+			});
+		}).on("click",".J_taskdesc_cle",function(){
+			//取消任务描述
+			$(this).parents(".J_taskdesc_form").slideUp("fast").prev(".J_task_desc").slideDown("fast");
 		});
 
 		$("#article").on("click", ".event-itm", function() {
 			//工作台 动态
-			submit.getTaskDetail($(this),slideOutTaskDetail);
+			submit.getTaskDetail($(this), slideOutTaskDetail);
 		}).on("click", ".ws-2-item", function() {
 			//工作台 任务
-			submit.getTaskDetail($(this),slideOutTaskDetail);
+			submit.getTaskDetail($(this), slideOutTaskDetail);
+			return false;
 		}).on("click", ".J_task_title", function() {
 			//项目详情（任务列表） task
-			submit.getTaskDetail($(this),slideOutTaskDetail);
+			submit.getTaskDetail($(this), slideOutTaskDetail);
 		}).on("click", ".J_project_item", function() {
 			//加载项目详情 =>tasklist
 			var $this = $(this);
@@ -181,10 +185,10 @@ define(function(require, exports, module) {
 			//新建任务确定按钮
 			var $this = $(this);
 
-			submit.newTask($(this),function(data) {
+			submit.newTask($(this), function(data) {
 
 				var taskItemHTML = "<li><input type=\"checkbox\" class=\"task-fanish J_task_fanish_btn\">" +
-					"<span class=\"J_task_title\" data-taskId=" + data.taskId + ">" + data.taskname + "</span>" +
+					"<span class=\"J_task_title task-title\" data-taskId=" + data.taskId + ">" + data.taskname + "</span>" +
 					"<span class=\"glyphicon glyphicon-remove J_delete_task\"></span>" +
 					"</li>";
 
@@ -198,31 +202,31 @@ define(function(require, exports, module) {
 		}).on("click", ".J_task_fanish_btn", function() {
 			//完成任务按钮
 			var $this = $(this);
-			submit.finishTask($(this),function(){
+			submit.finishTask($(this), function() {
 				$this.next(".J_task_title").addClass("finished");
 
 			});
-		}).on("click",".J_add_teamer",function(){
+		}).on("click", ".J_add_teamer", function() {
 			//团队 添加成员
 			$(this).slideUp("fast").next(".add-teamer-form").slideDown("fast");
 
-		}).on("click",".J_add_teamer_cle",function(){
+		}).on("click", ".J_add_teamer_cle", function() {
 			//团队 取消添加成员
 			$(this).parents(".add-teamer-form").slideUp("fast").prev(".J_add_teamer").slideDown("fast");
 
-		}).on("click",".J_add_teamer_cfm",function(){
+		}).on("click", ".J_add_teamer_cfm", function() {
 			//团队 确认添加成员
-			submit.addTeamer($(this),function(data){
-				var teamerListHtml = "<li class=\"teamer-item J_teamer_item\">"+
-										"<i class=\"user-img circle-img\">"+ data.userhead+"</i>" + data.teamername+
-									"</li>";
+			submit.addTeamer($(this), function(data) {
+				var teamerListHtml = "<li class=\"teamer-item J_teamer_item\">" +
+					"<i class=\"user-img circle-img\">" + data.userhead + "</i>" + data.teamername +
+					"</li>";
 				$("#J_team .J_teamer_item").parent().append(teamerListHtml);
 				$(".J_add_teamer_cle").trigger("click");
 			});
-		}).on("click",".J_delete_task",function(){
+		}).on("click", ".J_delete_task", function() {
 			//删除任务
 			var $this = $(this);
-			submit.deleteTask($this,function(){
+			submit.deleteTask($this, function() {
 				$this.parent("li").remove();
 			});
 		});
@@ -233,25 +237,25 @@ define(function(require, exports, module) {
 		$("#J_aside").on("click", ".a-list", function() {
 			var $this = $(this);
 			$this.addClass("cur").siblings().removeClass("cur");
-			if(!$this.data("teamid")){
+			if (!$this.data("teamid")) {
 				renderSection($this.data("type"));
-			}else{
+			} else {
 
 				var data = {
 					teamId: $this.data("teamid")
 				};
 
-				renderSection($this.data("type"),data);
+				renderSection($this.data("type"), data);
 			}
-			
-		}).on("click",".project-list",function(){
+
+		}).on("click", ".project-list", function() {
 			var $this = $(this);
 			var data = {
 				teamId: $this.data("teamid"),
 				projectId: $this.data("projectid")
 			};
 
-			renderSection($this.data("type"),data);
+			renderSection($this.data("type"), data);
 			return false;
 		});
 
@@ -741,6 +745,37 @@ define(function(require, exports, module) {
 				}
 			});
 		},
+		// updateTaskdesc:function($this,callback){
+		// 	var J_taskdesc_form = $(".J_taskdesc_form");
+		// 	var data = {
+		// 		teamId: J_taskdesc_form.data("teamid"),
+		// 		projectId: J_taskdesc_form.data("projectid"),
+		// 		taskId: J_taskdesc_form.data("taskid"),
+		// 		taskdesc: $("#taskdesc").val()
+		// 	};
+
+		// 	$.ajax({
+		// 		type: "post",
+		// 		url: "/submitUpdateTaskDesc",
+		// 		datatype: "json",
+		// 		data: data,
+		// 		success: function(data){
+		// 			if (data.success === "F") {
+		// 				// layer.alert(data.errMsg, {icon: 6});
+		// 				window.alert(data.errMsg);
+		// 			} else {
+		// 				if (typeof callback === "function") {
+		// 					callback.call(null,data.data);
+		// 				}
+		// 			}
+		// 		},
+		// 		error: function(data){
+		// 			if(data.errMsg){
+		// 				window.alert(data.errMsg);
+		// 			}
+		// 		}
+		// 	});
+		// },
 		addComment: function($this,callback){
 			var J_new_comment_form = $(".J_new_comment_form");
 
@@ -748,7 +783,7 @@ define(function(require, exports, module) {
 				teamId: J_new_comment_form.data("teamid"),
 				projectId: J_new_comment_form.data("projectid"),
 				taskId: J_new_comment_form.data("taskid"),
-				taskdesc: $("#comment").val()
+				content: $("#comment").val()
 			};
 
 			$.ajax({

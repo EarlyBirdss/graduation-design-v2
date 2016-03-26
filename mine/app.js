@@ -59,7 +59,7 @@ app.get('/home', function(req, res) {
         var callback = function(data) {
             // console.log("home", data);
             data.username = username;
-            data.userhead = getUserhead(username);
+            data.userheader = getUserhead(username);
             res.render("index", data);
             res.end();
         };
@@ -815,6 +815,15 @@ app.all("/submitNewTask", function(req, res) {
         } else if (team) {
             // var pIndex = team.project.indexOf(param.projectname);
             var taskId = team.project[param.projectId].task.length;
+            var comment = {
+                teamId: param.teamId,
+                projectId: param.projectId,
+                taskId: taskId,
+                user: req.session.username,
+                userheader: getUserhead(req.session.username),
+                content: req.session.username + "创建了该任务",
+                date: getTime().valueOf()
+            };
 
             team.project[param.projectId].task.push({
                 teamId: param.teamId,
@@ -824,7 +833,7 @@ app.all("/submitNewTask", function(req, res) {
                 taskdesc: "",
                 status: param.status,
                 finished: false,
-                comment:[],
+                comment:[comment],
                 createtime: getTime().valueOf(),
                 finishtime: ""
             });
@@ -877,18 +886,31 @@ app.all("/submitFinishTask", function(req, res) {
                 errMsg: "数据库错误，请稍后再试"
             });
         } else if (team) {
-            // var pIndex = team.project.indexOf(param.projectname);
-            var project = team.project[param.projectId];
-            // var tIndex = project.task.indexOf(param.teamname);
 
-            project.task[param.taskId].finished = true;
-            project.task[param.taskId].finishedtime = getTime().valueOf();
+            var task = team.project[param.projectId].task[param.taskId];
+            var comment = {
+                teamId: param.teamId,
+                projectId: param.projectId,
+                taskId: param.taskId,
+                user: req.session.username,
+                userheader: getUserhead(req.session.username),
+                content: req.session.username + "完成了该任务",
+                date: getTime().valueOf()
+            };
+
+
+            task.finished = true;
+            task.finishedtime = getTime().valueOf();
+            task.comment.push(comment);
+
             var _tid = team.id;
 
             delete team._id;
             TeamModel.update({
                 _id: param.teamId
             }, team, function(err) {
+
+                console.log("913",team);
                 if(err){
                    res.status(200).json({
                        success: "F",
@@ -1022,7 +1044,7 @@ app.all("/addTeamer",function(req,res){
 
 app.all("/submitComment",function(req,res){
     var param = req.body;
-    TeamModel({_id: param.teamId},function(err,team){
+    TeamModel.findOne({_id: param.teamId},function(err,team){
         if(err){
             res.status(200).json({
                 success: "F",
@@ -1055,7 +1077,7 @@ app.all("/submitComment",function(req,res){
                     success: "T",
                     message: "执行成功",
                     data:{
-                        user: req.session.username,
+                        username: req.session.username,
                         userheader: getUserhead(req.session.username),
                         content: param.content,
                         date: getTime().valueOf()
@@ -1080,7 +1102,7 @@ app.all("/submitTaskDesc",function(req,res){
     var param = req.body;
     console.log(param);
 
-    TeamModel({_id: param.teamId},function(err,team){
+    TeamModel.findOne({_id: param.teamId},function(err,team){
         console.log("1083,team");
         if(err){
             res.status(200).json({

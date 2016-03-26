@@ -20,7 +20,7 @@
 		</li>
 		<li class="task-box J_project_title" data-projectId="{{projectId}}" data-teamId="{{teamId}}" data-status="2">
 			<ul>
-				<li class="task-status">正在做</li>
+				<li class="task-status">在做</li>
 				{{each doing}}
 				<li><input type="checkbox" class="task-fanish J_task_fanish_btn" {{if $value.finished}}checked=""{{/if}}><span class="J_task_title task-title{{if $value.finished}}finished{{/if}}" data-taskId="{{$value.taskId}}">{{$value.taskname}} </span><span class="glyphicon glyphicon-remove J_delete_task"></span></li>
 				{{/each}}
@@ -34,7 +34,7 @@
 		</li>
 		<li class="task-box J_project_title" data-projectId="{{projectId}}" data-teamId="{{teamId}}" data-status="3">
 			<ul>
-				<li class="task-status">已完成</li>
+				<li class="task-status">待定</li>
 				{{each done}}
 				<li><input type="checkbox" class="task-fanish J_task_fanish_btn" {{if $value.finished}}checked=""{{/if}}><span class="J_task_title task-title{{if $value.finished}}finished{{/if}}" data-taskId="{{$value.taskId}}">{{$value.taskname}} </span><span class="glyphicon glyphicon-remove  J_delete_task"></span></li>
 				{{/each}}
