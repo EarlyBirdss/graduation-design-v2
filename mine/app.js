@@ -3,20 +3,21 @@ var express = require("express");
 var app = express();
 
 app.use(express.static(__dirname));
-
+//指定监听3000端口号
 app.listen(3000, function() {
     console.log("localhost start on port 3000");
 });
-
+//bodyParser用于解析客户端请求的body中的内容,内部使用JSON编码处理,url编码处理以及对于文件的上传处理
 var bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({
     extended: false
 }));
 app.use(bodyParser.json());
-
+//使用arttemplate作为模版引擎
 var template = require('art-template');
 template.config('base', '');
 template.config('extname', '.html');
+
 app.engine('.html', template.__express);
 app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
@@ -25,15 +26,15 @@ app.set('views', __dirname + '/views');
 var mongoose = require("mongoose");
 mongoose.connect('mongodb://localhost/worktile');
 var UserModel = require("./models/user.js");
-var ProjectModel = require("./models/project.js");
 var TeamModel = require("./models/team.js");
 
-
+//连接数据库
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function callback() {
     console.log('Successfully connected!');
 });
+
 
 var cookieParser = require('cookie-parser');
 app.use(cookieParser());
@@ -42,13 +43,13 @@ var session = require('express-session');
 app.use(session({
     secret: "secret",
     cookie: {
-        maxAge: 1000 * 60 * 30
+        maxAge: 1000 * 60 * 60 * 3
     },
     resave: true,
     saveUninitialized: true,
 }));
 
-app.get('/home', function(req, res) {
+app.get('/', function(req, res) {
 
     var username = req.session.username;
     // console.log("req.session.username", req.session.username);
@@ -196,7 +197,7 @@ function getProjectData(param, callback) {
 
                     if (i === (teams.length - 1) && typeof callback === "function") {
                         callback.call(null, data);
-                    } 
+                    }
 
                 });
 
@@ -228,7 +229,7 @@ function getTaskDetailData(param, callback) {
         // data.teamname = team.teamname;
         // data.projectname = project.projectname;
         // data.comment = task.comment;
-        console.log("taskDetail data",data);
+        console.log("taskDetail data", data);
         if (typeof callback === "function") {
             callback.call(null, data);
         }
@@ -615,7 +616,7 @@ app.all("/submitNewProject", function(req, res) {
                 success: "F",
                 errMsg: "数据库错误，请稍后再试"
             });
-        } else if(team){
+        } else if (team) {
             // console.log(team);
             var projectId = team.project.length;
             team.project.push({
@@ -630,28 +631,28 @@ app.all("/submitNewProject", function(req, res) {
             TeamModel.update({
                 _id: param.teamId
             }, team, function(err) {
-                if(err){
+                if (err) {
 
-                  res.status(200).json({
-                      success: "F",
-                      errMsg: "数据库错误，请稍后再试"
-                  });  
+                    res.status(200).json({
+                        success: "F",
+                        errMsg: "数据库错误，请稍后再试"
+                    });
 
-              }else{
-                res.status(200).json({
-                    success: "T",
-                    message: "创建成功",
-                    data: {
-                        teamId: param.teamId,
-                        projectId: projectId,
-                        projectname: param.projectname
-                    }
-                });
-                res.end();
-              }
-                
+                } else {
+                    res.status(200).json({
+                        success: "T",
+                        message: "创建成功",
+                        data: {
+                            teamId: param.teamId,
+                            projectId: projectId,
+                            projectname: param.projectname
+                        }
+                    });
+                    res.end();
+                }
+
             });
-            
+
         }
     });
 });
@@ -714,7 +715,7 @@ app.all("/submitNewTeam", function(req, res) {
                             success: "F",
                             message: "数据库错误，请稍后再试"
                         });
-                    }else{
+                    } else {
                         res.status(200).json({
                             success: "T",
                             message: "创建成功",
@@ -725,7 +726,7 @@ app.all("/submitNewTeam", function(req, res) {
                         });
                     }
                 });
-                
+
             });
         }
     });
@@ -780,18 +781,18 @@ app.all("/submitQuitTeam", function(req, res) {
                     _id: _tid
                 }, team, function(err) {
 
-                    if(err){
-                       res.status(200).json({
-                           success: "F",
-                           errMsg: "数据库错误，请稍后再试"
-                       }); 
-                   }else{
+                    if (err) {
+                        res.status(200).json({
+                            success: "F",
+                            errMsg: "数据库错误，请稍后再试"
+                        });
+                    } else {
                         res.status(200).json({
                             success: "T",
                             message: "您已退出" + teamname
                         });
-                   }
-                    
+                    }
+
                 });
             }
         });
@@ -833,36 +834,36 @@ app.all("/submitNewTask", function(req, res) {
                 taskdesc: "",
                 status: param.status,
                 finished: false,
-                comment:[comment],
+                comment: [comment],
                 createtime: getTime().valueOf(),
                 finishtime: ""
             });
 
             var _tid = team.id;
-            delete team._id; 
+            delete team._id;
             TeamModel.update({
 
                 _id: _tid
             }, team, function(err) {
-                if(err){
-                   res.status(200).json({
-                    success: "F",
-                    errMsg: "数据库错误，请稍后再试"
-                }); 
+                if (err) {
+                    res.status(200).json({
+                        success: "F",
+                        errMsg: "数据库错误，请稍后再试"
+                    });
                 }
                 res.status(200).json({
                     success: "T",
                     message: "创建成功",
-                    data:{
+                    data: {
                         teamId: param.teamId,
                         projectId: param.projectId,
                         taskId: taskId,
-                        taskname: param.taskname 
+                        taskname: param.taskname
                     }
                 });
-                
+
             });
-           
+
         } else {
             res.status(200).json({
                 success: "F",
@@ -910,21 +911,21 @@ app.all("/submitFinishTask", function(req, res) {
                 _id: param.teamId
             }, team, function(err) {
 
-                console.log("913",team);
-                if(err){
-                   res.status(200).json({
-                       success: "F",
-                       errMsg: "数据库错误，请稍后再试"
-                   }); 
-               }else{
-                res.status(200).json({
-                    success: "T",
-                    message: "执行成功"
-                });
-               }
-                
+                console.log("913", team);
+                if (err) {
+                    res.status(200).json({
+                        success: "F",
+                        errMsg: "数据库错误，请稍后再试"
+                    });
+                } else {
+                    res.status(200).json({
+                        success: "T",
+                        message: "执行成功"
+                    });
+                }
+
             });
-            
+
         } else {
             res.status(200).json({
                 success: "F",
@@ -934,35 +935,39 @@ app.all("/submitFinishTask", function(req, res) {
     });
 });
 
-app.all("/submitDeleteTask",function(req,res){
+app.all("/submitDeleteTask", function(req, res) {
     var param = req.body;
     //BUG
 
-    TeamModel.findOne({_id:param.teamId},function(err,team){
-        if(err){
+    TeamModel.findOne({
+        _id: param.teamId
+    }, function(err, team) {
+        if (err) {
             res.status(200).json({
                 success: "F",
                 errMsg: "数据库错误，请稍后再试"
             });
-        }else if(team){
-            team.project[param.projectId].task.splice(param.taskId,1);
+        } else if (team) {
+            team.project[param.projectId].task.splice(param.taskId, 1);
             console.log(team.project[param.projectId].task);
             var id = team._id;
             delete team._id;
-            TeamModel.update({_id: id}, team,function(err){
-                if(err){
+            TeamModel.update({
+                _id: id
+            }, team, function(err) {
+                if (err) {
                     res.status(200).json({
                         success: "F",
                         errMsg: "数据库错误，请稍后再试"
                     });
-                }else{
+                } else {
                     res.status(200).json({
                         success: "T",
                         message: "删除成功"
                     });
                 }
             });
-        }else{
+        } else {
             res.status(200).json({
                 success: "F",
                 errMsg: "后台错误，请稍后再试"
@@ -971,59 +976,59 @@ app.all("/submitDeleteTask",function(req,res){
     })
 });
 
-app.all("/addTeamer",function(req,res){
+app.all("/addTeamer", function(req, res) {
     var param = req.body;
 
     UserModel.findOne({
         username: param.teamername
-    },function(err,user){
-        if(err){
+    }, function(err, user) {
+        if (err) {
             res.status(200).json({
                 success: "F",
                 errMsg: "数据库错误，请稍后再试"
             });
-        }else if(user){
+        } else if (user) {
 
             TeamModel.findOne({
                 _id: param.teamId
-            },function(err,team){
-                if(err){
+            }, function(err, team) {
+                if (err) {
                     res.status(200).json({
                         success: "F",
                         errMsg: "数据库错误，请稍后再试"
                     });
-                }else if(team){
+                } else if (team) {
 
-                    if(team.teammember.indexOf(param.teamername) > -1){
+                    if (team.teammember.indexOf(param.teamername) > -1) {
                         res.status(200).json({
                             success: "F",
-                            errMsg: param.teamername+"已在"+team.teamname
+                            errMsg: param.teamername + "已在" + team.teamname
                         });
-                    }else{
-                       team.teammember.push(param.teamername);
-                       var _tid = team.id;
-                       TeamModel.update({
-                           _id: param.teamId
-                       }, team, function(err) {
-                           if(err){
-                              res.status(200).json({
-                                  success: "F",
-                                  errMsg: "数据库错误，请稍后再试"
-                              }); 
-                          }else{
-                           res.status(200).json({
-                               success: "T",
-                               message: "执行成功",
-                               data:{
-                                   userhead: getUserhead(param.teamername),
-                                   teamername: param.teamername
-                               }
-                           });
-                          }
-                           
-                       }); 
-                   }
-                    
+                    } else {
+                        team.teammember.push(param.teamername);
+                        var _tid = team.id;
+                        TeamModel.update({
+                            _id: param.teamId
+                        }, team, function(err) {
+                            if (err) {
+                                res.status(200).json({
+                                    success: "F",
+                                    errMsg: "数据库错误，请稍后再试"
+                                });
+                            } else {
+                                res.status(200).json({
+                                    success: "T",
+                                    message: "执行成功",
+                                    data: {
+                                        userhead: getUserhead(param.teamername),
+                                        teamername: param.teamername
+                                    }
+                                });
+                            }
+
+                        });
+                    }
+
                 } else {
                     res.status(200).json({
                         success: "F",
@@ -1031,26 +1036,28 @@ app.all("/addTeamer",function(req,res){
                     });
                 }
             });
-            
-        }else{
+
+        } else {
             res.status(200).json({
                 success: "F",
                 errMsg: "您输入的用户不存在"
             });
         }
     });
-    
+
 });
 
-app.all("/submitComment",function(req,res){
+app.all("/submitComment", function(req, res) {
     var param = req.body;
-    TeamModel.findOne({_id: param.teamId},function(err,team){
-        if(err){
+    TeamModel.findOne({
+        _id: param.teamId
+    }, function(err, team) {
+        if (err) {
             res.status(200).json({
                 success: "F",
                 errMsg: "数据库错误，请稍后再试"
             });
-        }else if(team){
+        } else if (team) {
 
             team.project[param.projectId].task[param.taskId].comment.push({
                 teamId: param.teamId,
@@ -1067,27 +1074,27 @@ app.all("/submitComment",function(req,res){
             TeamModel.update({
                 _id: _tid
             }, team, function(err) {
-                if(err){
-                   res.status(200).json({
-                       success: "F",
-                       errMsg: "数据库错误，请稍后再试"
-                   }); 
-               }else{
-                res.status(200).json({
-                    success: "T",
-                    message: "执行成功",
-                    data:{
-                        username: req.session.username,
-                        userheader: getUserhead(req.session.username),
-                        content: param.content,
-                        date: getTime().valueOf()
-                    }
-                });
-               }
-                
+                if (err) {
+                    res.status(200).json({
+                        success: "F",
+                        errMsg: "数据库错误，请稍后再试"
+                    });
+                } else {
+                    res.status(200).json({
+                        success: "T",
+                        message: "执行成功",
+                        data: {
+                            username: req.session.username,
+                            userheader: getUserhead(req.session.username),
+                            content: param.content,
+                            date: getTime().valueOf()
+                        }
+                    });
+                }
+
             });
 
-        }else{
+        } else {
             res.status(200).json({
                 success: "F",
                 errMsg: "后台错误，请稍后再试"
@@ -1098,18 +1105,20 @@ app.all("/submitComment",function(req,res){
 
 });
 
-app.all("/submitTaskDesc",function(req,res){
+app.all("/submitTaskDesc", function(req, res) {
     var param = req.body;
     console.log(param);
 
-    TeamModel.findOne({_id: param.teamId},function(err,team){
+    TeamModel.findOne({
+        _id: param.teamId
+    }, function(err, team) {
         console.log("1083,team");
-        if(err){
+        if (err) {
             res.status(200).json({
                 success: "F",
                 errMsg: "数据库错误，请稍后再试"
             });
-        }else if(team){
+        } else if (team) {
 
             team.project[param.projectId].task[param.taskId].taskdesc = param.taskdesc;
             console.log(team.project[param.projectId].task[param.taskId].taskdesc);
@@ -1118,26 +1127,26 @@ app.all("/submitTaskDesc",function(req,res){
             TeamModel.update({
                 _id: _tid
             }, team, function(err) {
-                if(err){
+                if (err) {
                     console.log("1099");
-                   res.status(200).json({
-                       success: "F",
-                       errMsg: "数据库错误，请稍后再试"
-                   }); 
-               }else{
-                console.log("1105");
-                res.status(200).json({
-                    success: "T",
-                    message: "执行成功",
-                    data:{
-                        taskdesc: param.taskdesc
-                    }
-                });
-               }
-                
+                    res.status(200).json({
+                        success: "F",
+                        errMsg: "数据库错误，请稍后再试"
+                    });
+                } else {
+                    console.log("1105");
+                    res.status(200).json({
+                        success: "T",
+                        message: "执行成功",
+                        data: {
+                            taskdesc: param.taskdesc
+                        }
+                    });
+                }
+
             });
 
-        }else{
+        } else {
             console.log("1118");
             res.status(200).json({
                 success: "F",

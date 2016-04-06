@@ -3,9 +3,9 @@ var mongoose = require("mongoose"),
 
 var ProjectSchema = new Schema({
 	teamId: String,
-	projectId: Number,
+	projectId: String,
 	projectname: String,
-	date: Date,
+	date: String,
 	task: Array
 });
 

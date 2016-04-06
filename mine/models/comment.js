@@ -3,8 +3,8 @@ var mongoose = require("mongoose"),
 
 var TaskSchema = new Schema({
 	teamId: String,
-	projectId: Number,
-	taskId: Number,
+	projectId: String,
+	taskId: String,
 	user: String,
 	userheader: String,
 	content: String,
