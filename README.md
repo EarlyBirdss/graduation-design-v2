@@ -1,6 +1,5 @@
-# 嗯 这是我的毕设
+# 嗯 毕设
 
-### 我不管我不管 终于完成了bug满满的毕设初稿
 
 ### 概述
 * 这篇毕设主要是worktile[http://www.worktile.com](http://www.worktile.com "worktile")仿站，只截取了最最简单最最基本的功能，有时间的话再来一步一步完善吧
@@ -40,15 +39,4 @@
  
 
 
-----------
- 
- 然后然后 当我多加几个团队几个项目的时候，最大的bug就出现了，参见，recordBUG.md[https://github.com/EarlyBirdss/graduation-design-v2/blob/master/recordBUG.md](https://github.com/EarlyBirdss/graduation-design-v2/blob/master/recordBUG.md "recordBUG.md")。就是mongoose的Model.find()异步的问题，或者说我根本不会mongoose联表查询或者不会组织数据结构。老大说回调太多了，让用promise。嗯嗯 肯定会用的，再等两天再来慢慢研究，这个大bug肯定是要改掉的。
-
- * 这里我新建了4个team 每个team下有1-2个project。
- * 然后不断的刷新页面，然后team就乱了
- * 就酱
- * ![](http://i.imgur.com/6PNgBu0.png)
- * ![](http://i.imgur.com/XJcErLT.png)
- * ![](http://i.imgur.com/4QIgOkd.png)
- * ![](http://i.imgur.com/KQ2mlGv.png)
 
